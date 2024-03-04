@@ -31,6 +31,10 @@ function App() {
             <Route path='/skill' element={<Skill />} />
             <Route path='/contact' element={<Contact />} />
           </Routes>
+          <About/>
+          <Project/>
+          <Skill/>
+          <Contact/>
           <Footer />
         </>
       )}
