@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link as ScrollLink } from 'react-scroll';
 
 function About() {
   useEffect(() => {
@@ -10,18 +9,10 @@ function About() {
 
   return (
     <>
-<<<<<<< HEAD
-      <h1  className="text-5xl font-semibold mb-[-10rem] md:text-justify text-gray-400 relative mx-[15rem] mt-[15rem]">About me
-        <div className="absolute bottom-0.2 left-12 w-full md:left-[calc(50% - 12rem)] md:w-[34rem] h-1 bg-cyan-800 mt-2"></div>
-      </h1>
-      <section id="about-section" className="flex justify-center items-center h-screen">
-        
-=======
-      <h1 className="text-5xl font-semibold mb-[-10rem] md:text-justify text-gray-400 relative mx-[15rem] mt-[15rem]">About me
+      <h1 id="about-section" className="text-5xl font-semibold mb-[-10rem] md:text-justify text-gray-400 relative mx-[15rem] mt-[15rem]">About me
         <div className="absolute bottom-0.2 left-12 w-full md:left-[calc(50% - 12rem)] md:w-[34rem] h-1 bg-cyan-800 mt-2"></div>
       </h1>
       <section className="flex justify-center items-center h-screen">
->>>>>>> 9375558b136add26a67be47340d3b536ce716224
         {/* Vertical Line */}
         <div className="hidden md:block fixed left-[2.8rem] top-[46rem] h-full flex flex-col justify-center ml-8">
           <div className="h-full bg-gray-500 w-1"></div>
