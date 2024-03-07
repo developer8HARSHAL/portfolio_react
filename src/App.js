@@ -8,6 +8,7 @@ import Home from './Contents/Home';
 import Contact from './Contents/Contact';
 import Footer from './Components/Footer';
 import Loader from './utility/Loading';
+import ReactDOM from 'react-dom/client';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -24,18 +25,11 @@ function App() {
       {loading ? <Loader /> : (
         <>
           <Header />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/project' element={<Project />} />
-            <Route path='/skill' element={<Skill />} />
-            <Route path='/contact' element={<Contact />} />
-          </Routes>
-          <Home/>
-          <About/>
-          <Project/>
-          <Skill/>
-          <Contact/>
+          <Home id="home" />
+          <About id="about" />
+          <Project id="project" />
+          <Skill id="skill" />
+          <Contact id="contact" />
           <Footer />
         </>
       )}

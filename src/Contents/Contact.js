@@ -20,7 +20,7 @@ function Contact() {
       </h1>
       <br/>
       <br/>
-      <section className="max-w-[35rem] mx-auto px-4 md:px-12 rounded-lg shadow-lg bg-gray-800">
+      <section id="contact-section" className="max-w-[35rem] mx-auto px-4 md:px-12 rounded-lg shadow-lg bg-gray-800">
         <h2 className="text-3xl font-bold text-center text-white mb-8 md:mb-16 py-8">Contact Me</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

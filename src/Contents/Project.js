@@ -9,7 +9,7 @@ function Project() {
   }, []);
 
   return (
-    <section className='flex justify-center items-center py-8 md:py-20 mb-20 '>
+    <section id="project-section" className='flex justify-center items-center py-8 md:py-20 mb-20 '>
       <div className="max-w-screen-xl mx-auto px-4 md:px-8" style={{ maxWidth: 'calc(100% - 200px)' }}>
         <h1 className="text-3xl md:text-5xl font-semibold mb-4 md:mb-8 md:text-justify text-gray-400 relative">My Work
           <div className="absolute bottom--2 left-12 w-full md:left-[calc(50% - 12rem)] md:w-[44rem] h-1 bg-cyan-800 mt-2"></div>

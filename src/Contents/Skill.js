@@ -3,10 +3,10 @@ import React from 'react';
 function Skill() {
   return (
     <>
-      <h1 className="text-5xl font-semibold mb-4 md:text-justify text-gray-400 relative mx-[12rem] mt-[16rem]">Skills
+      <h1 id="skill-section" className="text-5xl font-semibold mb-4 md:text-justify text-gray-400 relative mx-[12rem] mt-[16rem]">Skills
         <div className="absolute bottom-0.2 left-12 w-full md:left-[calc(50% - 12rem)] md:w-[24rem] h-1 bg-cyan-800 mt-2"></div> 
       </h1>
-      <section className="flex flex-col items-center  mx-4 ">
+      <section  className="flex flex-col items-center  mx-4 ">
       
         <br/>
         <br/>
