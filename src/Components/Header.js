@@ -60,7 +60,7 @@ const Header = () => {
                                         {item.Label}
                                     </ScrollLink>
                                 ))}
-                                <a href="/assets/HarshalPinge_Resume.pdf" target="_blank" rel="noopener noreferrer" className="block py-2 text-yellow-400 font-semibold hover:text-yellow-400 border-t border-yellow-400 mt-2 pt-2">
+                                <a href="/assets/Harshal_Pinge_Resume.pdf" target="_blank" rel="noopener noreferrer" className="block py-2 text-yellow-400 font-semibold hover:text-yellow-400 border-t border-yellow-400 mt-2 pt-2">
                                     Resume
                                 </a>
                             </div>
