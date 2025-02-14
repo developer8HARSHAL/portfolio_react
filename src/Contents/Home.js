@@ -9,22 +9,27 @@ function Home() {
   }, []);
 
   return (
-    <section id="home" className="text-white py-12" data-aos="fade-up">
+    <section id="home" className="text-white py-12" data-aos="fade-up gap-40">
       <div className="container mx-auto px-4 md:px-0 flex items-center justify-center">
-        <div className="flex flex-col md:flex-row items-start max-w-6xl w-full">
-          <div className="w-full md:w-1/3 flex justify-center mb-8 md:mb-0">
+        {/* Increased max-width for better content spacing */}
+        <div className="flex flex-col md:flex-row items-start max-w-7xl w-full">
+          {/* Image container with fixed width of 300px and increased margin */}
+          <div className="w-full md:w-1/3 flex justify-center mb-16 md:mb-0"> {/* Increased bottom margin from 12 to 16 */}
             <img
               src="/assets/portfolio.jpg"
               alt="Profile"
-              className="w-96 md:w-[500px] h-auto shadow-lg rounded-lg" // Increased size to w-96 (384px) and md:w-[400px]
+              className="w-[300px] h-[300px] rounded-lg object-cover" // Fixed width and height to 300px, added object-cover
             />
           </div>
           
-          <div className="w-full md:w-2/3 md:pl-12 flex items-start">
+          {/* Content container with increased padding for larger gap */}
+          <div className="w-full md:w-2/3 md:pl-24 flex items-start"> {/* Increased left padding from 16 to 24 */}
+            {/* Vertical line separator */}
             <div className="flex-none mr-6 md:mr-8">
               <div className="h-full border-r border-blue-300"></div>
             </div>
             
+            {/* Text content */}
             <div className="flex-grow">
               <h1 className="text-5xl md:text-4xl font-bold text-blue-500 md:text-left">
                 HEY hii!!<br />
