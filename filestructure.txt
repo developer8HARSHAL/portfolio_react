@@ -1,0 +1,65 @@
+|-- .gitignore
+|-- package-lock.json
+|-- package.json
+|-- public
+    |-- assets
+        |-- aws.jpeg
+        |-- bootstrap.png
+        |-- c++.jpg
+        |-- c++.png
+        |-- c.jpeg
+        |-- coff.png
+        |-- css.jpeg
+        |-- edms.png
+        |-- eternal.png
+        |-- external.webp
+        |-- github.jpg
+        |-- harshalpinge1.pdf
+        |-- html.jpg
+        |-- icon.png
+        |-- im1 (2).png
+        |-- im1.png
+        |-- im3.png
+        |-- images.png
+        |-- instagram.png
+        |-- js.png
+        |-- linkedin.png
+        |-- loading.gif
+        |-- logo.png
+        |-- main.png
+        |-- main3.png
+        |-- md.png
+        |-- ms.png
+        |-- nj.png
+        |-- portfolio.jpg
+        |-- py.jpeg
+        |-- react.png
+        |-- Recording 2024-03-03 193609.mp4
+        |-- tl.png
+        |-- twitter.png
+        |-- WhatsApp_Image_2023-12-24_at_23.28.19_aab82b571-removebg-preview.png
+    |-- favicon.ico
+    |-- index.html
+    |-- logo192.png
+    |-- logo512.png
+    |-- manifest.json
+    |-- robots.txt
+|-- README.md
+|-- src
+    |-- App.js
+    |-- Components
+        |-- Footer.js
+        |-- Header.js
+    |-- Contents
+        |-- About.js
+        |-- Contact.js
+        |-- Home.js
+        |-- Project.js
+        |-- Skill.js
+    |-- index.css
+    |-- index.js
+    |-- utility
+        |-- Loading.js
+        |-- multi.js
+        |-- Particles.js
+|-- tailwind.config.js

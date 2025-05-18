@@ -4,66 +4,85 @@ import 'aos/dist/aos.css';
 
 function About() {
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS with options
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
-    <>
-      <h1 id="about-section" className="text-5xl font-semibold mb-[-10rem] md:text-justify text-gray-400 relative mx-[15rem] mt-[15rem]">About me
-        <div className="absolute bottom-0.2 left-12 w-full md:left-[calc(50% - 12rem)] md:w-[34rem] h-1 bg-cyan-800 mt-2"></div>
-      </h1>
-      <section className="flex justify-center items-center h-screen">
-        {/* Vertical Line */}
-        <div className="hidden md:block fixed left-[2.8rem] top-[46rem] h-full flex flex-col justify-center ml-8">
-          <div className="h-full bg-gray-500 w-1"></div>
-        </div>
+    <section id="about" className="py-20 relative bg-gray-900">
+      {/* Section heading with animated underline */}
+      <div className="container mx-auto px-4 mb-16" data-aos="fade-up">
+       <h1 className="text-3xl md:text-5xl font-semibold mb-4 ml-36 md:mb-8 md:text-justify text-gray-400 relative">About me
+          <div className="absolute bottom--2 left-12 w-full md:left-[calc(50% - 12rem)] md:w-[44rem] h-1 bg-cyan-800 mt-2"></div>
+        </h1>
+      </div>
 
-        {/* Social Links */}
-        <div className="md:block fixed left-[0.5rem] top-[22rem] h-full flex flex-col justify-center gap-102 ml-8">
-          <a href="https://github.com/developer8HARSHAL" className="block">
-            <img src="assets/github.jpg" alt="Social Link 1" className="w-20 h-20 mb-4 hover:opacity-75 rounded-full" />
-          </a>
-          <a href="https://twitter.com/iAmHarshal8?t=MC5KxrUhJfithoJ7M-sxAA&s=09" className="block rounded-full">
-            <img src="assets/twitter.png" alt="Social Link 2" className="w-20 h-20 mb-4 hover:opacity-75 rounded-full" />
-          </a>
-          <a href="https://www.linkedin.com/in/harshal-pinge-ab13b5216" className="block">
-            <img src="assets/linkedin.png" alt="Social Link 3" className="w-20 h-20 mb-4 hover:opacity-75 rounded-full" />
-          </a>
-          <a href="https://www.instagram.com/harshal08.?utm_source=qr&igsh=bWUwaDc0eWd3MnNl" className="block">
-            <img src="assets/instagram.png" alt="Social Link 4" className="w-20 h-20 mb-4 hover:opacity-75 rounded-full" />
-          </a>
-        </div>
+      {/* Main content area */}
+      <div className="container mx-auto px-4 md:px-0">
+        <div className="flex flex-col  items-center md:space-x-12">
+          
+        
+          
+          {/* Right side - Bio information */}
+          <div className="w-full md:w-1/2">
+            <div className="bg-gray-800 bg-opacity-50 p-8 rounded-lg shadow-lg border border-gray-700" data-aos="fade-left">
+              <div className="space-y-6">
+               
+                
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                  </div>
+                  <p className="ml-4 text-xl text-gray-300 leading-relaxed">
+                    I am pursuing my Bachelor of Engineering in Computer Engineering from <span className="text-blue-500 font-medium">Pune University (SPPU)</span>, and I am currently in my fourth-year of studies.
+                  </p>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                  </div>
+                  <p className="ml-4 text-xl text-gray-300 leading-relaxed">
+                    I've developed strong skills in <span className="text-blue-500 font-medium">Data Structures & Algorithms</span> and <span className="text-blue-500 font-medium">C++</span>, regularly practicing on platforms like <span className="text-blue-500 font-medium">LeetCode</span> to sharpen my problem-solving abilities.
+                  </p>
+                </div>
 
-        <div className="hidden md:block fixed right-[12.2rem] top-[57rem] h-full flex flex-col justify-right ml-8">
-          <div className="h-full bg-white w-1"></div>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                  </div>
+                  <p className="ml-4 text-xl text-gray-300 leading-relaxed">
+                    During my academic journey, I was introduced to <span className="text-blue-500 font-medium">cloud computing</span> in my third year, and I have developed a strong passion for it as well.
+                  </p>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                  </div>
+                  <p className="ml-4 text-xl text-gray-300 leading-relaxed">
+                    Alongside my studies, I have also earned several certifications in JavaScript, <span className="text-blue-500 font-medium">full-stack development</span>, and recently, I completed the <span className="text-blue-500 font-medium">Cloud Jam GCP certification</span>. I am excited about the opportunities that lie ahead in both <span className="text-blue-500 font-medium">full-stack development</span> and <span className="text-blue-500 font-medium">cloud computing</span>.
+                  </p>
+                </div>
+              </div>
+              
+           
+           
+            </div>
+          </div>
         </div>
-        <div className="md:block fixed hidden side right-[32rem] top-[4rem] h-full flex flex-col justify-center ml-8" style={{ transform: 'rotate(90deg)' }}>
-          <a href="mailto:your-email@example.com" className="block">
-            <h1 className='text-4xl font-bold text-gray-500'>HarshalPinge@Gmail.Com</h1>
-          </a>
-        </div>
-
-        {/* Main Content */}
-        <div className="max-w-2xl mx-auto md:mx-4 p-1 rounded-lg shadow-lg text-gray-500 md:ml-100 md:mr-100">
-          <br /><br />
-          <p className="text-2xl leading-relaxed justify-start" data-aos="fade-right">
-            I was first introduced to programming, particularly <span className="text-blue-500">full-stack development</span>, towards the end of my 12th standard. Since then, I have been diligently practicing and honing my skills in this field. I completed my 10th and 12th grades from CBSE boards in Nagpur.
-          </p>
-          <br />
-          <p className="text-2xl leading-relaxed justify-start" data-aos="fade-right">
-            Currently, I am pursuing my Bachelor of Engineering in Computer Engineering from <span className="text-blue-500">Pune University</span>, and I am currently in my fourth-year of studies.
-          </p>
-          <br />
-          <p className="text-2xl leading-relaxed justify-start" data-aos="fade-right">
-            During my academic journey, I was introduced to <span className="text-blue-500">cloud computing</span> in my third year, and I have developed a strong passion for it as well.
-          </p>
-          <br />
-          <p className="text-2xl leading-relaxed justify-start" data-aos="fade-right">
-            Alongside my studies, I have also earned several certifications in JavaScript, <span className="text-blue-500">full-stack development</span>, and recently, I completed the <span className="text-blue-500">Cloud Jam GCP certification</span>. I am excited about the opportunities that lie ahead in both <span className="text-blue-500">full-stack development</span> and <span className="text-blue-500">cloud computing</span>, and I am eager to continue learning and growing in these fields.
-          </p>
-        </div>
-      </section>
-    </>
+      </div>
+      
+      {/* Custom CSS for animation */}
+      <style jsx>{`
+        @keyframes expand {
+          0% { width: 0; }
+          100% { width: 100%; }
+        }
+        .animate-expand {
+          animation: expand 2s ease-out forwards;
+        }
+      `}</style>
+    </section>
   );
 }
 
