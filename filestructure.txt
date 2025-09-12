@@ -3,6 +3,7 @@
 |-- package.json
 |-- public
     |-- assets
+        |-- 3.png
         |-- aws.jpeg
         |-- bootstrap.png
         |-- c++.jpg
@@ -59,7 +60,9 @@
     |-- index.css
     |-- index.js
     |-- utility
+        |-- ErrorBoundary.js
         |-- Loading.js
         |-- multi.js
         |-- Particles.js
+        |-- ScrollToTop.js
 |-- tailwind.config.js
