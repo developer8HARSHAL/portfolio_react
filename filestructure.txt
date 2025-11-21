@@ -11,11 +11,12 @@
         |-- c.jpeg
         |-- coff.png
         |-- css.jpeg
+        |-- ds2.png
         |-- edms.png
         |-- eternal.png
         |-- external.webp
         |-- github.jpg
-        |-- harshalpinge1.pdf
+        |-- HarshalPinge.pdf
         |-- html.jpg
         |-- icon.png
         |-- im1 (2).png
@@ -25,12 +26,15 @@
         |-- instagram.png
         |-- js.png
         |-- linkedin.png
+        |-- LinkedIn_Profile-removebg-preview.png
+        |-- LinkedIn_Profile.jpg
         |-- loading.gif
         |-- logo.png
         |-- main.png
         |-- main3.png
         |-- md.png
         |-- ms.png
+        |-- n8n2.png
         |-- nj.png
         |-- portfolio.jpg
         |-- py.jpeg
@@ -54,6 +58,7 @@
     |-- Contents
         |-- About.js
         |-- Contact.js
+        |-- Experience.js
         |-- Home.js
         |-- Project.js
         |-- Skill.js

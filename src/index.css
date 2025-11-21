@@ -1,150 +1,211 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables for theming */
-:root {
-  --color-primary: 250 204 21; /* yellow-400 */
-  --color-primary-dark: 245 158 11; /* yellow-500 */
-  --color-background: 3 7 18; /* slate-950 */
-  --color-background-secondary: 15 23 42; /* slate-800 */
-  --color-text-primary: 248 250 252; /* slate-50 */
-  --color-text-secondary: 148 163 184; /* slate-400 */
-  --color-border: 30 41 59; /* slate-700 */
-}
-
-/* Base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
+/* ===================================
+   Base Styles & Smooth Scrolling
+   =================================== */
+*,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 html {
-  font-size: 62.5%; /* 10px base for easy rem calculations */
-  scroll-padding-top: 8rem; /* Account for fixed header */
+  font-size: 62.5%; /* 1rem = 10px for easier calculations */
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px; /* Prevents fixed header from covering content */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1.6rem; /* 16px */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
   line-height: 1.6;
-  color: rgb(var(--color-text-primary));
-  background: linear-gradient(
-    135deg,
-    rgb(var(--color-background)) 0%,
-    rgb(var(--color-background-secondary)) 100%
-  );
+  color: rgb(248 250 252);
+  background: linear-gradient(135deg, rgb(2 6 23) 0%, rgb(15 23 42) 50%, rgb(30 41 59) 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
   min-height: 100vh;
   position: relative;
+  isolation: isolate;
 }
 
-/* Custom scrollbar for webkit browsers */
+/* ===================================
+   Typography
+   =================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: rgb(248 250 252);
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: clamp(4rem, 8vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: rgb(203 213 225);
+}
+
+a {
+  color: rgb(59 130 246);
+  text-decoration: none;
+  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+  color: rgb(96 165 250);
+}
+
+a:focus-visible {
+  outline: 2px solid rgb(59 130 246);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* ===================================
+   Custom Scrollbar
+   =================================== */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(var(--color-background));
+  background: rgb(2 6 23);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--color-border));
-  border-radius: 4px;
+  background: rgb(51 65 85);
+  border-radius: 9999px;
+  border: 2px solid rgb(2 6 23);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-text-secondary));
+  background: rgb(71 85 105);
 }
 
-/* Selection styles */
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(51 65 85) rgb(2 6 23);
+}
+
+/* ===================================
+   Selection Styles
+   =================================== */
 ::selection {
-  background-color: rgb(var(--color-primary) / 0.2);
-  color: rgb(var(--color-text-primary));
+  background-color: rgba(59, 130, 246, 0.3);
+  color: rgb(248 250 252);
 }
 
-/* Focus styles for accessibility */
-:focus-visible {
-  outline: 2px solid rgb(var(--color-primary));
-  outline-offset: 2px;
-  border-radius: 4px;
+::-moz-selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: rgb(248 250 252);
 }
 
-/* Custom utility classes */
+/* ===================================
+   Component Utilities
+   =================================== */
 @layer components {
-  .container-custom {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  /* Text Gradients */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent;
   }
   
-  .section-spacing {
-    @apply py-24 lg:py-32;
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent;
   }
   
-  .text-gradient {
-    @apply bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent;
-  }
-  
+  /* Glass Effect Cards */
   .card-glass {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl;
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
   }
   
+  .card-glass-hover {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl 
+           hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-slate-900 font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:scale-105 focus:ring-2 focus:ring-yellow-400/50 focus:outline-none;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 
+           bg-gradient-to-r from-blue-500 to-cyan-500
+           text-white font-semibold rounded-full 
+           shadow-lg shadow-blue-500/30
+           transition-all duration-300 
+           hover:shadow-xl hover:shadow-blue-500/50 
+           hover:scale-105
+           focus:ring-2 focus:ring-blue-400/50 focus:outline-none
+           active:scale-100;
   }
   
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-slate-600 text-slate-300 font-medium rounded-full transition-all duration-200 hover:border-slate-500 hover:text-white focus:ring-2 focus:ring-slate-500/50 focus:outline-none;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 
+           border-2 border-blue-500 text-blue-400 font-semibold rounded-full 
+           bg-blue-500/5 backdrop-blur-sm
+           transition-all duration-300 
+           hover:bg-blue-500 hover:text-white hover:shadow-lg hover:shadow-blue-500/30
+           hover:scale-105
+           focus:ring-2 focus:ring-blue-400/50 focus:outline-none
+           active:scale-100;
+  }
+
+  /* Badge */
+  .badge-status {
+    @apply inline-flex items-center gap-2 px-4 py-2 
+           bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 
+           text-blue-300 text-sm font-medium rounded-full;
+  }
+
+  /* Social Link */
+  .social-link {
+    @apply flex items-center justify-center 
+           bg-white/5 hover:bg-white/10 
+           border border-white/10 hover:border-blue-500/50 
+           rounded-full text-slate-400 hover:text-white
+           transition-all duration-300 hover:scale-110;
   }
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
+/* ===================================
+   Animations & Keyframes
+   =================================== */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -154,49 +215,85 @@ body {
   }
 }
 
-@keyframes pulse-glow {
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes bounce {
   0%, 100% {
-    box-shadow: 0 0 20px rgb(var(--color-primary) / 0.3);
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
   50% {
-    box-shadow: 0 0 40px rgb(var(--color-primary) / 0.6);
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
 
-/* Animation utility classes */
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-fade-in-left {
-  animation: fadeInLeft 0.6s ease-out forwards;
-}
-
-.animate-fade-in-right {
-  animation: fadeInRight 0.6s ease-out forwards;
-}
-
+/* Animation Utility Classes */
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
 }
 
-/* Responsive typography */
-@media (max-width: 640px) {
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+/* Animation Delays */
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* ===================================
+   Responsive Design
+   =================================== */
+@media (max-width: 768px) {
   html {
-    font-size: 57.5%; /* Slightly smaller on mobile */
+    font-size: 57.5%; /* Slightly smaller base font on mobile */
   }
 }
 
-/* Reduced motion preferences */
+@media (max-width: 640px) {
+  html {
+    font-size: 55%;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+  }
+}
+
+/* ===================================
+   Accessibility
+   =================================== */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .no-print {
+    display: none !important;
   }
 }

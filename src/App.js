@@ -8,6 +8,7 @@ import Home from './Contents/Home';
 import Contact from './Contents/Contact';
 import Footer from './Components/Footer';
 import Loader from './utility/Loading';
+import Experience from './Contents/Experience';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,7 @@ function App() {
                 <>
                   <Home id="home" />
                   <About id="about" />
+                  <Experience id="experience"/>
                   <Project id="project" />
                   <Skill id="skill" />
                   <Contact id="contact" />
@@ -61,8 +63,9 @@ function App() {
               } 
             />
             <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Project />} />
-            <Route path="/skills" element={<Skill />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/project" element={<Project />} />
+            <Route path="/skill" element={<Skill />} />
             <Route path="/contact" element={<Contact />} />
             {/* Add a catch-all route for 404 pages */}
             <Route 
