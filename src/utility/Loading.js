@@ -16,21 +16,9 @@ function Loading() {
           style={{ animationDuration: '3s' }}
         />
       </div>
+     
       
-      {/* Loading Text */}
-      <div className="mt-8 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-          Loading <span className="text-gradient-primary">Experience</span>
-        </h2>
-        <p className="text-slate-400 text-sm">Please wait while we set things up...</p>
-      </div>
-      
-      {/* Progress Bar */}
-      <div className="mt-6 w-64 h-1 bg-slate-800 rounded-full overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 animate-pulse rounded-full" 
-             style={{ width: '100%', animation: 'pulse 1.5s ease-in-out infinite' }}>
-        </div>
-      </div>
+     
       
       {/* Dots Animation */}
       <div className="flex gap-2 mt-4">
