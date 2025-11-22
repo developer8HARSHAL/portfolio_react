@@ -92,11 +92,7 @@ function Contact() {
       </p>
     </div>
 
-          <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-6"></div>
-
-          <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl mb-24">
-            Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new opportunities.
-          </p>
+        
 
 
         <div className="grid lg:grid-cols-2 gap-8">

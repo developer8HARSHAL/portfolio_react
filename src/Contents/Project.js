@@ -24,7 +24,7 @@ function Project() {
         Storage: "50MB",
         RBAC: "3-Level"
       },
-      size: "large" // Featured project
+      size: "large" 
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ function Project() {
       category: "Tools & SDK",
       description: "API monitoring processing 10K+ requests/hour across 100+ endpoints with sub-50ms latency. Published NPM package with real-time dashboard.",
       image: "assets/ds2.png",
-      githubLink: "https://github.com/developer8HARSHAL/devmetrics-sdk",
+      githubLink: "https://github.com/developer8HARSHAL/DevMetrics",
       liveLink: "https://dev-metrics-six.vercel.app/",
       npmLink: "https://www.npmjs.com/package/devmetrics-sdk",
       tech: ["JavaScript SDK", "Express.js", "MongoDB", "Next.js"],
@@ -44,20 +44,23 @@ function Project() {
       },
       size: "large" // Featured project
     },
-    {
-      id: 3,
-      title: "Edureka",
-      tagline: "Cloud Kitchen & Food Delivery",
-      category: "Full-Stack",
-      description: "End-to-end food delivery platform with real-time tracking, restaurant recommendations, and multi-gateway payment integration.",
-      image: "assets/im3.png",
-      githubLink: "https://github.com",
-      tech: ["React", "Node.js", "MongoDB", "Socket.io", "Redis"],
+   {
+      id: 1,
+      title: "ROIgen",
+      tagline: "AI Cost Optimization Advisor",
+      category: "AI",
+      description: "Enterprise AI cost consultant that identifies automation opportunities, recommends optimal LLMs, tracks credit consumption, and calculates ROI across business functions.",
+      image: "assets/fs3.png",
+      githubLink:"https://github.com/developer8HARSHAL/AI-Cost-Optimization-Advisor",
+      liveLink: "https://lnkd.in/d2sjTXDW",
+      tech: ["Lyzr Studio", "Amazon Nova", "AWS Bedrock", "AI Agents"],
       metrics: {
-        Orders: "5K+",
-        Uptime: "99.9%"
+        "Cost Accuracy": "92%",
+        "ROI Accuracy": "89%",
       },
-      size: "medium"
+      achievement: "🏆 HackerEarth Lyzr AI Architect Challenge",
+      isSpecial: true,
+      size: "large" // Featured project
     },
     {
       id: 4,
@@ -66,7 +69,7 @@ function Project() {
       category: "AI",
       description: "Intelligent n8n workflow for automated bug triage, semantic duplicate detection, and AI-powered GitHub issue analysis.",
       image: "assets/n8n2.png",
-      githubLink: "https://github.com/developer8HARSHAL/coffee-town/tree/master",
+      githubLink: "https://github.com/developer8HARSHAL/Bug-Analyzer-Agent",
       tech: ["n8n", "LLM", "Vector DB"],
       metrics: {
         Detection: "AI",
@@ -81,7 +84,7 @@ function Project() {
       category: "Cloud",
       description: "Scalable blogging platform with AWS serverless architecture. Handles 100K+ monthly visitors with near-zero downtime.",
       image: "assets/aws.jpeg",
-      githubLink: "https://github.com",
+      // githubLink: "https://github.com",
       tech: ["AWS Lambda", "DynamoDB", "CloudFront", "S3"],
       metrics: {
         Visitors: "100K+",

@@ -15,6 +15,7 @@
         |-- edms.png
         |-- eternal.png
         |-- external.webp
+        |-- fs3.png
         |-- github.jpg
         |-- HarshalPinge.pdf
         |-- html.jpg
