@@ -9,7 +9,7 @@ function Home() {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center text-white py-32 lg:py-40 relative overflow-hidden">
+   <section id="home" className="min-h-screen flex items-center text-white pt-24 pb-16 lg:py-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
 
       <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
@@ -40,8 +40,8 @@ function Home() {
             </div>
 
             {/* Description */}
-            <div className="space-y-5 max-w-2xl">
-              <p className="text-2xl lg:text-3xl text-slate-300 leading-relaxed font-medium">
+            <div className="space-y-5 max-w-2xl px-2 lg:px-0">
+  <p className="text-xl lg:text-3xl text-slate-300 leading-relaxed font-medium">
                 Computer Engineering graduate (2025) specializing in Frontend Developer, based in <span className="text-blue-400 font-semibold">Pune, India.</span>
               </p>
 

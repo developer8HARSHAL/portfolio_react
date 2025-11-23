@@ -8,7 +8,7 @@ function About() {
   }, []);
 
   return (
-    <section id="about" className="min-h-screen py-32 lg:py-40 relative overflow-hidden">
+    <section id="about" className="min-h-screen pt-24 pb-16 lg:py-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
 
       <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
