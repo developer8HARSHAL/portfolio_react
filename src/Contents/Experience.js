@@ -13,8 +13,8 @@ function Experience() {
       rating: "4.5/5",
       achievements: [
         "Designed and implemented an employee management system using Next.js and Tailwind CSS, improving HR task efficiency by 35% and reducing manual errors by 25%",
-        "Optimized performance through code-splitting and lazy loading, achieving 23% improvement (Lighthouse: 72→89, Load: 3.2s→2.5s)",
-        "Worked independently under HR guidance, receiving regular feedback and direction while consistently meeting project milestones and deadlines"
+       "Optimized performance through code-splitting and lazy loading, achieving 23% improvement (Lighthouse: 72→89, Load: 3.2s→2.5s)",
+        "Delivered all project milestones on schedule while working independently, earning a 4.5/5 performance rating for code quality, communication skills, and consistent deadline adherence"
       ],
       technologies: ["Next.js", "Tailwind CSS", "React.js", "JavaScript"],
       metrics: [

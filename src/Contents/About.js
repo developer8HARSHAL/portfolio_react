@@ -131,9 +131,9 @@ function About() {
                   <div className="flex-shrink-0 mt-2">
                     <div className="w-3 h-3 bg-blue-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
-                  <p className="text-lg text-slate-300 leading-relaxed">
-                    I'm a Computer Engineering graduate specializing in <span className="text-blue-400 font-semibold">full-stack web development</span> with hands-on experience in the <span className="text-blue-400 font-semibold">MERN stack</span>. I completed my Bachelor's from Zeal College, Pune with a minor in Data Science.
-                  </p>
+                 <p className="text-lg text-slate-300 leading-relaxed">
+  Computer Engineering graduate (2025) from Zeal College, Pune, specializing in <span className="text-blue-400 font-semibold">Frontend development</span> with hands-on experience in the <span className="text-blue-400 font-semibold">MERN stack</span>. Completed a minor in <span className="text-blue-400 font-semibold">Data Science</span>, combining development skills with data-driven problem-solving.
+</p>
                 </div>
 
                 <div className="flex items-start gap-4 group">
@@ -159,8 +159,8 @@ function About() {
                     <div className="w-3 h-3 bg-cyan-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
                   <p className="text-lg text-slate-300 leading-relaxed">
-                    With strong problem-solving skills and <span className="text-cyan-400 font-semibold">100+ LeetCode problems</span> solved, I'm passionate about building modern web applications and continuously learning new technologies.
-                  </p>
+  With strong problem-solving skills (<span className="text-cyan-400 font-semibold">100+ LeetCode problems</span> solved) and a proven track record of delivering results, I'm seeking entry-level full-stack developer roles where I can build scalable, impactful web applications and continue growing as a developer.
+</p>
                 </div>
               </div>
             </div>

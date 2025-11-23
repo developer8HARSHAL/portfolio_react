@@ -98,7 +98,7 @@ const Header = () => {
             <div className="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/30 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/50 group-hover:scale-110">
               <img 
                 src='/assets/logo.png' 
-                alt="Harshal Pinge Logo" 
+                alt="Harshal Pinge - Frontend Dev"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -107,7 +107,7 @@ const Header = () => {
                 Harshal
               </div>
               <div className="text-[10px] sm:text-xs text-slate-400 font-medium">
-                Full-Stack Dev
+                Frontend Dev
               </div>
             </div>
           </Link>
@@ -138,7 +138,7 @@ const Header = () => {
           {/* Desktop Resume Button */}
           <div className="hidden lg:block flex-shrink-0">
             <a 
-              href="/assets/harshalpinge1.pdf"
+              href="/assets/HarshalPinge.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 xl:px-8 py-3 xl:py-3.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-[15px] xl:text-[16px] font-semibold rounded-full shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
@@ -226,7 +226,7 @@ const Header = () => {
                 {/* Mobile Resume Button */}
                 <div className="border-t border-white/10 pt-6 space-y-4">
                   <a 
-                    href="/assets/harshalpinge1.pdf"
+                   href="/assets/HarshalPinge.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-[16px] font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/50"

@@ -16,6 +16,7 @@
         |-- eternal.png
         |-- external.webp
         |-- fs3.png
+        |-- Gemini_Generated_Image_h5ce23h5ce23h5ce.png
         |-- github.jpg
         |-- HarshalPinge.pdf
         |-- html.jpg
@@ -29,6 +30,8 @@
         |-- linkedin.png
         |-- LinkedIn_Profile-removebg-preview.png
         |-- LinkedIn_Profile.jpg
+        |-- LinkedIn_Profile1.jpg
+        |-- LinkedIn_Profile2.png
         |-- loading.gif
         |-- logo.png
         |-- main.png

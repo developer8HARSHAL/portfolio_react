@@ -20,7 +20,7 @@ function Home() {
             {/* Badge */}
             <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-blue-300">Available for work</span>
+              <span className="text-sm font-medium text-blue-300">Fresh Graduate 2025 | Seeking Full-Time Role</span>
             </div>
 
             {/* Main Heading */}
@@ -36,19 +36,17 @@ function Home() {
               <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-lg font-black shadow-lg">
                 FD
               </div>
-              <span className="text-xl font-semibold text-white">Fullstack Developer</span>
+              <span className="text-xl font-semibold text-white">Frontend Developer</span>
             </div>
 
             {/* Description */}
             <div className="space-y-5 max-w-2xl">
               <p className="text-2xl lg:text-3xl text-slate-300 leading-relaxed font-medium">
-                Experience designer and developer remotely from <span className="text-blue-400 font-semibold">Pune, India.</span>
+                Computer Engineering graduate (2025) specializing in Frontend Developer, based in <span className="text-blue-400 font-semibold">Pune, India.</span>
               </p>
 
               <p className="text-lg lg:text-xl text-slate-400 leading-relaxed">
-                I'm a passionate developer with expertise in <span className="text-blue-400 font-semibold">React.js, Next.js, Node.js, Express.js</span>, and
-                <span className="text-blue-400 font-semibold"> cloud computing</span>. Strong in <span className="text-blue-400 font-semibold">C++</span> with
-                <span className="text-blue-400 font-semibold"> 100+ LeetCode problems</span> solved.
+                Recently completed a frontend internship at <span className="text-blue-400 font-semibold">Fulcrum Resources</span> (rated 4.5/5), where I improved HR efficiency by <span className="text-blue-400 font-semibold">35%</span> and reduced manual errors by <span className="text-blue-400 font-semibold">25%</span>. Published an <span className="text-blue-400 font-semibold">npm package</span> (DevMetrics SDK), built enterprise applications with <span className="text-blue-400 font-semibold">25+ RESTful APIs</span>, and solved <span className="text-blue-400 font-semibold">100+ LeetCode problems</span>. Strong foundation in <span className="text-blue-400 font-semibold">MERN stack</span>, <span className="text-blue-400 font-semibold">cloud computing</span>, and <span className="text-blue-400 font-semibold">C++</span>.
               </p>
             </div>
 
@@ -79,7 +77,7 @@ function Home() {
               <span className="text-sm text-slate-500 font-medium">Follow me:</span>
               <div className="flex gap-4">
                 <a
-                  href="nkedin.com/in/harshal-pinge-ab13b5216/"
+                  href="https://linkedin.com/in/harshal-pinge-ab13b5216/"
                   className="social-link w-12 h-12"
                   aria-label="LinkedIn"
                 >
@@ -118,7 +116,7 @@ function Home() {
                 {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-cyan-400/20 to-purple-500/30 rounded-full blur-[100px] scale-90 group-hover:scale-100 transition-transform duration-700"></div> */}
 
                 <img
-                  src="/assets/LinkedIn_Profile.jpg"
+                  src="/assets/LinkedIn_Profile1.jpg"
                   alt="Harshal Pinge"
                   className="relative w-full h-auto transform group-hover:scale-[1.03] transition-transform duration-700 drop-shadow-2xl"
                 // style={{ filter: 'drop-shadow(0 20px 60px rgba(59, 130, 246, 0.4))' }}

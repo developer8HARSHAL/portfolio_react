@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function Contact() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
   const handleChange = (e) => {
     setFormData({
@@ -17,22 +19,48 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    
     setSubmitting(true);
+    setSubmitStatus(null);
 
-    // Replace with your actual email
-    const mailtoLink = `mailto:Harshalpinge@gmail.com?subject=${encodeURIComponent(formData.subject || 'Contact Form Submission')}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`;
+    try {
+      // Replace these with your EmailJS credentials
+      const serviceId = 'service_qsmolsq';
+      const templateId = 'template_qiku3k2';
+      const publicKey = 'gCyrVJg4WwOcvCsbL';
 
-    window.location.href = mailtoLink;
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'harshalpinge@gmail.com'
+        },
+        publicKey
+      );
 
-    // Reset form after short delay
-    setTimeout(() => {
-      setSubmitting(false);
+      setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1000);
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -43,8 +71,8 @@ function Contact() {
         </svg>
       ),
       label: "EMAIL",
-      value: "Harshalpinge@gmail.com",
-      link: "mailto:Harshalpinge@gmail.com"
+      value: "harshalpinge@gmail.com",
+      link: null
     },
     {
       icon: (
@@ -69,31 +97,28 @@ function Contact() {
   ];
 
   return (
-   <section id="contact" className="min-h-screen py-32 lg:py-40 relative overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
-  
-  <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
-    
-    {/* Section Header - ADDED */}
-    <div className="mb-20 lg:mb-28">
-      <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full mb-6">
-        <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-        <span className="text-sm font-medium text-blue-300">Let's Connect</span>
-      </div>
+    <section id="contact" className="min-h-screen py-32 lg:py-40 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
       
-      <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-4">
-        Get in <span className="text-gradient-primary">Touch</span>
-      </h2>
-      
-      <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-6"></div>
-      
-      <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl mb-16">
-        Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new opportunities.
-      </p>
-    </div>
-
+      <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
         
-
+        {/* Section Header */}
+        <div className="mb-20 lg:mb-28">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full mb-6">
+            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+            <span className="text-sm font-medium text-blue-300">Let's Connect</span>
+          </div>
+          
+          <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-4">
+            Get in <span className="text-gradient-primary">Touch</span>
+          </h2>
+          
+          <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-6"></div>
+          
+          <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl mb-16">
+            Have a project in mind or want to discuss opportunities? I'm currently seeking entry-level full-stack developer roles and would love to hear from you. Let's connect!
+          </p>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
 
@@ -105,7 +130,7 @@ function Contact() {
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
-                className="card-glass-hover group p-6"
+                  className="card-glass-hover group p-6"
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex-shrink-0 w-16 h-16 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400 border border-blue-500/30 group-hover:scale-110 transition-transform duration-300">
@@ -125,7 +150,7 @@ function Contact() {
                           {info.value}
                         </a>
                       ) : (
-                        <p className="text-white text-base break-words ">{info.value}</p>
+                        <p className="text-white text-2xl break-words">{info.value}</p>
                       )}
                     </div>
                   </div>
@@ -169,6 +194,33 @@ function Contact() {
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8">
               <div className="space-y-6">
 
+                {/* Success/Error Message */}
+                {submitStatus && (
+                  <div className={`p-4 rounded-xl border ${
+                    submitStatus === 'success' 
+                      ? 'bg-green-500/10 border-green-500/30 text-green-400' 
+                      : 'bg-red-500/10 border-red-500/30 text-red-400'
+                  }`}>
+                    <div className="flex items-center gap-2">
+                      {submitStatus === 'success' ? (
+                        <>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Message sent successfully! I'll get back to you soon.</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                          <span>Failed to send message. Please try again or email me directly.</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* Name Input */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-slate-400 mb-2 uppercase tracking-wider">
@@ -182,8 +234,9 @@ function Contact() {
                     onChange={handleChange}
                     onFocus={() => setFocusedField('name')}
                     onBlur={() => setFocusedField(null)}
-                    className={`w-full px-4 py-3 bg-slate-900/50 border ${focusedField === 'name' ? 'border-blue-500' : 'border-slate-700'
-                      } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300`}
+                    className={`w-full px-4 py-3 bg-slate-900/50 border ${
+                      focusedField === 'name' ? 'border-blue-500' : 'border-slate-700'
+                    } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300`}
                     placeholder="Name"
                     required
                   />
@@ -203,8 +256,9 @@ function Contact() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField('email')}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full px-4 py-3 bg-slate-900/50 border ${focusedField === 'email' ? 'border-blue-500' : 'border-slate-700'
-                        } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300`}
+                      className={`w-full px-4 py-3 bg-slate-900/50 border ${
+                        focusedField === 'email' ? 'border-blue-500' : 'border-slate-700'
+                      } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300`}
                       placeholder="Email ID"
                       required
                     />
@@ -222,8 +276,9 @@ function Contact() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField('subject')}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full px-4 py-3 bg-slate-900/50 border ${focusedField === 'subject' ? 'border-blue-500' : 'border-slate-700'
-                        } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300`}
+                      className={`w-full px-4 py-3 bg-slate-900/50 border ${
+                        focusedField === 'subject' ? 'border-blue-500' : 'border-slate-700'
+                      } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300`}
                       placeholder="Project Inquiry"
                       required
                     />
@@ -243,8 +298,9 @@ function Contact() {
                     onFocus={() => setFocusedField('message')}
                     onBlur={() => setFocusedField(null)}
                     rows="6"
-                    className={`w-full px-4 py-3 bg-slate-900/50 border ${focusedField === 'message' ? 'border-blue-500' : 'border-slate-700'
-                      } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300 resize-none`}
+                    className={`w-full px-4 py-3 bg-slate-900/50 border ${
+                      focusedField === 'message' ? 'border-blue-500' : 'border-slate-700'
+                    } rounded-xl text-white placeholder:text-slate-600 focus:outline-none transition-all duration-300 resize-none`}
                     placeholder="Tell me about your project..."
                     required
                   ></textarea>
@@ -285,3 +341,17 @@ function Contact() {
 }
 
 export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

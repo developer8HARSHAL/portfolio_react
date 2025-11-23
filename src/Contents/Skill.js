@@ -106,26 +106,26 @@ function Skill() {
 
   return (
     <section id="skill" className="min-h-screen py-32 lg:py-40 relative overflow-hidden">
-      
+
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
 
       <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
-        
+
         {/* Section Header */}
         <div className="mb-20 lg:mb-28">
           <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full mb-6">
             <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
             <span className="text-sm font-medium text-blue-300">Technical Expertise</span>
           </div>
-          
+
           <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-4">
-            Skills &<span className="text-gradient-primary"> Tech Stack</span> 
+            Skills &<span className="text-gradient-primary"> Tech Stack</span>
           </h2>
-          
+
           <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-6"></div>
-          
+
           <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl">
-            Comprehensive skill set across the full-stack development spectrum
+            Proven technical expertise across the full-stack development spectrum, from frontend to backend, databases to cloud deployment
           </p>
         </div>
 
@@ -151,9 +151,9 @@ function Skill() {
           </div>
           <div className="card-glass text-center p-6">
             <div className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent mb-2">
-              3+
+              4.5/5
             </div>
-            <div className="text-sm text-slate-400 font-medium">Years Exp</div>
+            <div className="text-sm text-slate-400 font-medium">Intern Rating</div>
           </div>
         </div>
 
@@ -161,7 +161,7 @@ function Skill() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {domains.map((domain, domainIndex) => {
             const colors = colorSchemes[domain.color];
-            
+
             return (
               <div
                 key={domainIndex}
@@ -209,7 +209,7 @@ function Skill() {
 
         {/* Problem Solving & Certifications */}
         <div className="grid md:grid-cols-2 gap-6">
-          
+
           {/* Problem Solving */}
           <div className="card-glass-hover p-6">
             <div className="flex items-start gap-4">
@@ -221,7 +221,7 @@ function Skill() {
               <div>
                 <h3 className="text-lg font-bold text-white mb-2">Problem Solving</h3>
                 <p className="text-slate-400 text-sm mb-3">
-                  DSA expertise with Arrays, Strings, DP, Stacks & Queues
+                  Strong DSA foundation: Arrays, Strings, Dynamic Programming, Stacks, Queues, and algorithmic problem-solving
                 </p>
                 <div className="flex gap-2">
                   <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs font-medium text-purple-300">
@@ -235,8 +235,8 @@ function Skill() {
             </div>
           </div>
 
-          
-          
+
+
         </div>
 
       </div>
