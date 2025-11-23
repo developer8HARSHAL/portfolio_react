@@ -94,7 +94,7 @@ const Header = () => {
             to="/"
             className="relative z-50 group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-white rounded-lg px-2 py-1 flex-shrink-0"
           >
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/30 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/50 group-hover:scale-110">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/40 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/50 group-hover:scale-110">
               <img
                 src='/assets/logo.png'
                 alt="Harshal Pinge - Full-Stack Developer"
