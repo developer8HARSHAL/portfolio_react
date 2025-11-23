@@ -75,7 +75,7 @@ function Footer() {
               © {currentYear} Harshal Pinge
             </p>
             <p className='text-slate-500 text-sm'>
-              Coded with <span className='text-red-400'>❤️</span> using React & Tailwind CSS
+              Coded with <span className='text-red-400'></span> using React & Tailwind CSS
             </p>
           </div>
         </div>
