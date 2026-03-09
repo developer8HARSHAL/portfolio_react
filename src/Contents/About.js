@@ -1,11 +1,39 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { useEffect, useRef } from 'react';
+
+
+function useFadeIn(delay = 0) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          observer.disconnect(); // mirrors AOS `once: true`
+        }
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return ref;
+}
 
 function About() {
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
+  const headerRef = useFadeIn(0);
+  const leftRef   = useFadeIn(100);
+  const rightRef  = useFadeIn(200);
 
   return (
     <section id="about" className="min-h-screen pt-24 pb-16 lg:py-40 relative overflow-hidden">
@@ -14,8 +42,8 @@ function About() {
       <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
 
         {/* Section Header */}
-        <div className="mb-20 lg:mb-28" data-aos="fade-up">
-           <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full mb-6">
+        <div ref={headerRef} className="mb-20 lg:mb-28">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full mb-6">
             <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
             <span className="text-sm font-medium text-blue-300">Get to know me</span>
           </div>
@@ -31,7 +59,7 @@ function About() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
 
           {/* Left Side - Stats Cards */}
-          <div className="space-y-6" data-aos="fade-right">
+          <div ref={leftRef} className="space-y-6">
 
             {/* Education Card */}
             <div className="card-glass-hover p-8 group">
@@ -49,12 +77,8 @@ function About() {
                   <p className="text-lg text-slate-300 leading-relaxed">
                     Bachelor of Engineering in <span className="text-blue-400 font-semibold">Computer Engineering</span>
                   </p>
-                  <p className="text-base text-slate-400 mt-2">
-                    Zeal College, Pune • 2021-2025
-                  </p>
-                  <p className="text-sm text-slate-500 mt-1">
-                    Minor: Data Science
-                  </p>
+                  <p className="text-base text-slate-400 mt-2">Zeal College, Pune • 2021–2025</p>
+                  <p className="text-sm text-slate-500 mt-1">Minor: Data Science</p>
                 </div>
               </div>
             </div>
@@ -74,9 +98,7 @@ function About() {
                   <p className="text-lg text-slate-300 leading-relaxed">
                     Frontend Developer <span className="text-green-400 font-semibold">Intern</span>
                   </p>
-                  <p className="text-base text-slate-400 mt-2">
-                    Fulcrum Resources • Nov 2024 - Feb 2025
-                  </p>
+                  <p className="text-base text-slate-400 mt-2">Fulcrum Resources • Nov 2024 – Feb 2025</p>
                   <div className="flex items-center gap-2 mt-2">
                     <div className="flex items-center">
                       {[...Array(4)].map((_, i) => (
@@ -84,8 +106,8 @@ function About() {
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
-                      <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" clipPath="inset(0 50% 0 0)" />
+                      <svg className="w-4 h-4 text-yellow-400 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     </div>
                     <span className="text-sm text-slate-400">4.5/5 Rating</span>
@@ -109,9 +131,7 @@ function About() {
                   <p className="text-lg text-slate-300 leading-relaxed">
                     Strong expertise in <span className="text-purple-400 font-semibold">DSA</span> and <span className="text-purple-400 font-semibold">C++</span>
                   </p>
-                  <p className="text-base text-slate-400 mt-2">
-                    100+ problems solved on LeetCode
-                  </p>
+                  <p className="text-base text-slate-400 mt-2">100+ problems solved on LeetCode</p>
                 </div>
               </div>
             </div>
@@ -119,21 +139,23 @@ function About() {
           </div>
 
           {/* Right Side - Bio Story */}
-          <div className="space-y-8" data-aos="fade-left">
+          <div ref={rightRef} className="space-y-8">
 
             {/* Main Bio Card */}
             <div className="card-glass p-10">
               <h3 className="text-3xl font-bold text-white mb-8">My Journey</h3>
 
               <div className="space-y-6">
-
                 <div className="flex items-start gap-4 group">
                   <div className="flex-shrink-0 mt-2">
                     <div className="w-3 h-3 bg-blue-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
-                 <p className="text-lg text-slate-300 leading-relaxed">
-  Computer Engineering graduate (2025) from Zeal College, Pune, specializing in <span className="text-blue-400 font-semibold">Frontend development</span> with hands-on experience in the <span className="text-blue-400 font-semibold">MERN stack</span>. Completed a minor in <span className="text-blue-400 font-semibold">Data Science</span>, combining development skills with data-driven problem-solving.
-</p>
+                  <p className="text-lg text-slate-300 leading-relaxed">
+                    Computer Engineering graduate (2025) from Zeal College, Pune, specializing in{' '}
+                    <span className="text-blue-400 font-semibold">Frontend development</span> with hands-on experience in the{' '}
+                    <span className="text-blue-400 font-semibold">MERN stack</span>. Completed a minor in{' '}
+                    <span className="text-blue-400 font-semibold">Data Science</span>, combining development skills with data-driven problem-solving.
+                  </p>
                 </div>
 
                 <div className="flex items-start gap-4 group">
@@ -141,7 +163,8 @@ function About() {
                     <div className="w-3 h-3 bg-green-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
                   <p className="text-lg text-slate-300 leading-relaxed">
-                    During my internship at <span className="text-green-400 font-semibold">Fulcrum Resources</span>, I designed an employee management system using Next.js, improving HR efficiency by 35% and achieving a <span className="text-green-400 font-semibold">4.5/5 performance rating</span>.
+                    During my internship at <span className="text-green-400 font-semibold">Fulcrum Resources</span>, I designed an employee management system using Next.js, improving HR efficiency by 35% and achieving a{' '}
+                    <span className="text-green-400 font-semibold">4.5/5 performance rating</span>.
                   </p>
                 </div>
 
@@ -150,7 +173,9 @@ function About() {
                     <div className="w-3 h-3 bg-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
                   <p className="text-lg text-slate-300 leading-relaxed">
-                    I've built production-ready projects including an <span className="text-purple-400 font-semibold">Enterprise Document Management System</span> with 25+ REST APIs and published an <span className="text-purple-400 font-semibold">npm package (DevMetrics SDK)</span> for API monitoring.
+                    I've built production-ready projects including an{' '}
+                    <span className="text-purple-400 font-semibold">Enterprise Document Management System</span> with 25+ REST APIs and published an{' '}
+                    <span className="text-purple-400 font-semibold">npm package (DevMetrics SDK)</span> for API monitoring.
                   </p>
                 </div>
 
@@ -159,13 +184,11 @@ function About() {
                     <div className="w-3 h-3 bg-cyan-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                   </div>
                   <p className="text-lg text-slate-300 leading-relaxed">
-  With strong problem-solving skills (<span className="text-cyan-400 font-semibold">100+ LeetCode problems</span> solved) and a proven track record of delivering results, I'm seeking entry-level full-stack developer roles where I can build scalable, impactful web applications and continue growing as a developer.
-</p>
+                    With strong problem-solving skills (<span className="text-cyan-400 font-semibold">100+ LeetCode problems</span> solved) and a proven track record, I'm seeking entry-level full-stack developer roles where I can build scalable, impactful web applications.
+                  </p>
                 </div>
               </div>
             </div>
-
-            
 
           </div>
         </div>

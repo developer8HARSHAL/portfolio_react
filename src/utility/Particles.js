@@ -1,11 +1,22 @@
-import React, { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
+import { loadSlim } from 'tsparticles-slim'; // ✅ replaces loadFull
+
+
 
 const ParticlesBackground = () => {
-  const particlesInit = useCallback(async (engine) => {
-    await loadFull(engine);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 800);
+    return () => clearTimeout(t);
   }, []);
+
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
+
+  if (!show) return null;
 
   return (
     <Particles
@@ -13,96 +24,75 @@ const ParticlesBackground = () => {
       init={particlesInit}
       options={{
         background: {
-          color: {
-            value: "transparent"
-          }
+          color: { value: 'transparent' },
         },
         fullScreen: {
           enable: true,
-          zIndex: 0
+          zIndex: 0,
         },
         particles: {
           color: {
-            value: ["#3b82f6", "#06b6d4", "#ffffff"]
+            value: ['#3b82f6', '#06b6d4', '#ffffff'],
           },
+
           links: {
-            color: "#3b82f6",
-            distance: 150,
-            enable: true,
-            opacity: 0.3,
-            width: 1,
-            triangles: {
-              enable: false
-            }
+            enable: false,
           },
+
           move: {
             enable: true,
-            speed: 1,
-            direction: "none",
+            speed: 0.8,         
+            direction: 'none',
             random: true,
             straight: false,
-            outModes: {
-              default: "bounce"
-            },
-            attract: {
-              enable: true,
-              rotateX: 600,
-              rotateY: 1200
-            }
+            outModes: { default: 'bounce' },
+            attract: { enable: false }, 
           },
+
           number: {
-            density: {
-              enable: true,
-              area: 800
-            },
-            value: 60
+            density: { enable: true, area: 800 },
+            value: 35,            
           },
+
           opacity: {
-            value: { min: 0.3, max: 0.7 },
+            value: { min: 0.2, max: 0.5 },
             animation: {
               enable: true,
-              speed: 1,
-              sync: false
-            }
+              speed: 0.6,      
+              sync: false,
+            },
           },
+
           shape: {
-            type: ["circle", "triangle"]
+            type: 'circle',       
           },
+
           size: {
-            value: { min: 1, max: 4 },
+            value: { min: 1, max: 3 },
             animation: {
-              enable: true,
-              speed: 2,
-              sync: false
-            }
-          }
+              enable: false,      
+            },
+          },
         },
+
         interactivity: {
-          detect_on: "canvas",
+          detect_on: 'canvas',
           events: {
-            onHover: {
-              enable: true,
-              mode: "grab"
-            },
-            onClick: {
-              enable: true,
-              mode: "push"
-            },
-            resize: true
+            onHover: { enable: true, mode: 'grab' },
+            onClick: { enable: true, mode: 'push' },
+            resize: true,
           },
           modes: {
             grab: {
               distance: 140,
-              links: {
-                opacity: 0.5
-              }
+              links: { opacity: 0.4 },
             },
-            push: {
-              quantity: 4
-            }
-          }
+            push: { quantity: 2 }, 
+          },
         },
-        detectRetina: true
+
+
+        detectRetina: false,
       }}
       style={{
         position: 'fixed',
@@ -111,7 +101,7 @@ const ParticlesBackground = () => {
         width: '100%',
         height: '100%',
         zIndex: 0,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
       }}
     />
   );

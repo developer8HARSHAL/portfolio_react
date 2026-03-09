@@ -34,8 +34,6 @@
         |-- LinkedIn_Profile2.png
         |-- loading.gif
         |-- logo.png
-        |-- main.png
-        |-- main3.png
         |-- md.png
         |-- ms.png
         |-- n8n2.png
@@ -43,14 +41,9 @@
         |-- portfolio.jpg
         |-- py.jpeg
         |-- react.png
-        |-- Recording 2024-03-03 193609.mp4
         |-- tl.png
         |-- twitter.png
-        |-- WhatsApp_Image_2023-12-24_at_23.28.19_aab82b571-removebg-preview.png
-    |-- favicon.ico
     |-- index.html
-    |-- logo192.png
-    |-- logo512.png
     |-- manifest.json
     |-- robots.txt
 |-- README.md

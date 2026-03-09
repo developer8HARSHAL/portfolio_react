@@ -135,7 +135,7 @@ const Header = () => {
           {/* Desktop Resume Button */}
           <div className="hidden lg:block flex-shrink-0">
             <a
-              href="/assets/HarshalPinge.pdf"
+              href="https://drive.google.com/file/d/19_PN5l-UZzJxbGh5H0n9wdm9NtbEAEFt/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 xl:px-8 py-3 xl:py-3.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-[15px] xl:text-[16px] font-semibold rounded-full shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
@@ -217,7 +217,10 @@ const Header = () => {
                 {/* Mobile Resume Button */}
                 <div className="border-t border-white/30 pt-6 space-y-4">
                   <a
-                    href="/assets/HarshalPinge.pdf"
+                    href="https://drive.google.com/file/d/19_PN5l-UZzJxbGh5H0n9wdm9NtbEAEFt/view?usp=drive_link
+
+
+"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-[16px] font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/50"
