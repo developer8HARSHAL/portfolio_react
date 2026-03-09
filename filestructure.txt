@@ -31,6 +31,7 @@
         |-- LinkedIn_Profile-removebg-preview.png
         |-- LinkedIn_Profile.jpg
         |-- LinkedIn_Profile1.jpg
+        |-- LinkedIn_Profile1.webp
         |-- LinkedIn_Profile2.png
         |-- loading.gif
         |-- logo.png
