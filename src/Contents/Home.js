@@ -9,7 +9,7 @@ function Home() {
   }, []);
 
   return (
-   <section id="home" className="min-h-screen flex items-center text-white pt-24 pb-16 lg:py-40 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center text-white pt-24 pb-16 lg:py-40 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
 
       <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
@@ -41,7 +41,7 @@ function Home() {
 
             {/* Description */}
             <div className="space-y-5 max-w-2xl px-2 lg:px-0">
-  <p className="text-xl lg:text-3xl text-slate-300 leading-relaxed font-medium">
+              <p className="text-xl lg:text-3xl text-slate-300 leading-relaxed font-medium">
                 Computer Engineering graduate (2025) specializing in Frontend Developer, based in <span className="text-blue-400 font-semibold">Pune, India.</span>
               </p>
 
@@ -60,10 +60,7 @@ function Home() {
               </Link>
 
               <a
-                href="https://drive.google.com/file/d/19_PN5l-UZzJxbGh5H0n9wdm9NtbEAEFt/view?usp=drive_link
-
-
-"
+                href="https://drive.google.com/file/d/19_PN5l-UZzJxbGh5H0n9wdm9NtbEAEFt/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-lg lg:text-xl px-10 py-5"
@@ -110,23 +107,19 @@ function Home() {
             </div>
           </div>
 
-          {/* Right Side - Profile Image with Floating Badges */}
           <div className="order-1 lg:order-2 relative" data-aos="fade-left">
             <div className="relative w-full max-w-2xl mx-auto">
-              {/* Main Profile Image - No background, just cutout */}
               <div className="relative z-10 group">
-                {/* Glow effect behind cutout image */}
-                {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-cyan-400/20 to-purple-500/30 rounded-full blur-[100px] scale-90 group-hover:scale-100 transition-transform duration-700"></div> */}
-
                 <img
-                  src="/assets/LinkedIn_Profile1.jpg"
+                  src="assets/LinkedIn_Profile1.webp"
                   alt="Harshal Pinge"
-                  className="relative w-full h-auto transform group-hover:scale-[1.03] transition-transform duration-700 drop-shadow-2xl"
-                // style={{ filter: 'drop-shadow(0 20px 60px rgba(59, 130, 246, 0.4))' }}
+                  fetchpriority="high"
+                  width="520"
+                  height="520"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
 
-              {/* Floating Badge 1 - Developer */}
               <div
                 className="absolute top-8 lg:top-12 -left-8 lg:-left-16 z-20 animate-float"
                 data-aos="zoom-in"
@@ -140,7 +133,6 @@ function Home() {
                 </div>
               </div>
 
-              {/* Floating Badge 2 - Experience Designer */}
               <div
                 className="absolute top-32 lg:top-44 -right-8 lg:-right-20 z-20 animate-float delay-200"
                 data-aos="zoom-in"
@@ -154,7 +146,6 @@ function Home() {
                 </div>
               </div>
 
-              {/* Floating Badge 3 - C++ */}
               <div
                 className="absolute bottom-12 lg:bottom-16 -left-6 lg:-left-12 z-20 animate-float delay-400"
                 data-aos="zoom-in"
