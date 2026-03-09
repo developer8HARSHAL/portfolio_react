@@ -1,94 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 import Header from './Components/Header';
-import About from './Contents/About';
-import Project from './Contents/Project';
-import Skill from './Contents/Skill';
-import Home from './Contents/Home';
-import Contact from './Contents/Contact';
-import Footer from './Components/Footer';
-import Loader from './utility/Loading';
-import Experience from './Contents/Experience';
+
+const Home       = lazy(() => import('./Contents/Home'));
+const About      = lazy(() => import('./Contents/About'));
+const Experience = lazy(() => import('./Contents/Experience'));
+const Project    = lazy(() => import('./Contents/Project'));
+const Skill      = lazy(() => import('./Contents/Skill'));
+const Contact    = lazy(() => import('./Contents/Contact'));
+const Footer     = lazy(() => import('./Components/Footer'));
+
+function SectionFallback() {
+  return (
+    <div className="min-h-[50vh] flex items-center justify-center bg-slate-950">
+      <div className="w-8 h-8 rounded-full border-2 border-slate-700 border-t-blue-500 animate-spin" />
+    </div>
+  );
+}
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
-    // Simulate fetching data or any async operation
-    const timer = setTimeout(() => {
-      setLoading(false); // Set loading to false after a delay
-    }, 2000); // Adjust the delay as needed
+    ReactGA.send({ hitType: 'pageview', page: location.pathname });
 
-    return () => clearTimeout(timer); // Clean up the timer
-  }, []);
-
-  // Scroll to the appropriate section when the hash changes
-  useEffect(() => {
-    if (!loading) {
-      const hash = location.hash;
-      if (hash) {
-        // Remove the # character
-        const id = hash.substring(1);
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      } else {
-        // Scroll to top if no hash
-        window.scrollTo(0, 0);
-      }
+    const hash = location.hash;
+    if (hash) {
+      const id = hash.substring(1);
+      const t = setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return () => clearTimeout(t);
+    } else {
+      window.scrollTo(0, 0);
     }
-  }, [location, loading]);
+  }, [location]);
 
   return (
     <div className="App bg-gray-900 min-h-screen">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Header />
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <>
-                  <Home id="home" />
-                  <About id="about" />
-                  <Experience id="experience"/>
-                  <Project id="project" />
-                  <Skill id="skill" />
-                  <Contact id="contact" />
-                </>
-              } 
-            />
-            <Route path="/about" element={<About />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/project" element={<Project />} />
-            <Route path="/skill" element={<Skill />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* Add a catch-all route for 404 pages */}
-            <Route 
-              path="*" 
-              element={
-                <div className="flex items-center justify-center h-screen">
-                  <div className="text-center">
-                    <h1 className="text-6xl font-bold text-blue-500 mb-4">404</h1>
-                    <p className="text-2xl text-white mb-8">Page not found</p>
-                    <a 
-                      href="/" 
-                      className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
-                    >
-                      Go Home
-                    </a>
-                  </div>
-                </div>
-              } 
-            />
-          </Routes>
-          <Footer />
-        </>
-      )}
+      <Header />
+
+      <Routes>
+
+        <Route
+          path="/"
+          element={
+            <>
+              <Suspense fallback={<SectionFallback />}><Home /></Suspense>
+              <Suspense fallback={<SectionFallback />}><About /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Experience /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Project /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Skill /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
+            </>
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <div className="flex items-center justify-center h-screen">
+              <div className="text-center">
+                <h1 className="text-6xl font-bold text-blue-500 mb-4">404</h1>
+                <p className="text-2xl text-white mb-8">Page not found</p>
+                <a
+                  href="/"
+                  className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+                >
+                  Go Home
+                </a>
+              </div>
+            </div>
+          }
+        />
+
+      </Routes>
+
+      <Suspense fallback={null}><Footer /></Suspense>
     </div>
   );
 }

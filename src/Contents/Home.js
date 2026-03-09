@@ -60,7 +60,10 @@ function Home() {
               </Link>
 
               <a
-                href="/assets/HarshalPinge.pdf"
+                href="https://drive.google.com/file/d/19_PN5l-UZzJxbGh5H0n9wdm9NtbEAEFt/view?usp=drive_link
+
+
+"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-lg lg:text-xl px-10 py-5"
