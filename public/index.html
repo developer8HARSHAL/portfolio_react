@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var stored = null;
+        try {
+          stored = window.localStorage.getItem('portfolio-theme');
+        } catch {
+          // Continue with the system preference if storage is unavailable.
+        }
+        var theme = stored === 'light' || stored === 'dark'
+          ? stored
+          : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/assets/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0F172A" />
+    <meta name="theme-color" content="#09090b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
     
     <!-- Primary Meta Tags -->
-    <title>Harshal Pinge - Full-Stack Developer | React, Next.js, Node.js | Fresh Graduate 2025</title>
-    <meta name="title" content="Harshal Pinge - Full-Stack Developer | Fresh Graduate 2025" />
-    <meta name="description" content="Computer Engineering graduate (2025) specializing in MERN stack development. Completed frontend internship rated 4.5/5 at Fulcrum Resources. Published npm package (DevMetrics SDK). Built enterprise applications with 25+ APIs. Seeking full-stack developer roles." />
-    <meta name="keywords" content="Harshal Pinge,Frontend Developer Full-Stack Developer, React Developer, Next.js Developer, Node.js, MERN Stack, Fresh Graduate 2025, Frontend Developer, Backend Developer, Web Developer, JavaScript, MongoDB, Express.js, Pune India, Computer Engineering, npm package, DevMetrics SDK, LeetCode, Fulcrum Resources, Entry Level Developer, Junior Developer" />
+    <title>Harshal Pinge — Frontend &amp; Full-Stack Developer</title>
+    <meta name="title" content="Harshal Pinge — Frontend &amp; Full-Stack Developer" />
+    <meta name="description" content="Computer Engineering graduate in Pune building web applications with React, Next.js, and Node.js. Explore selected frontend, full-stack, backend, and cloud projects." />
+    <meta name="keywords" content="Harshal Pinge, Frontend Developer, Full-Stack Developer, React, Next.js, Node.js, JavaScript, MongoDB, Express.js, Pune, Computer Engineering, DevMetrics SDK" />
     <meta name="author" content="Harshal Pinge" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://harshalpinge.vercel.app/" />
@@ -19,20 +37,20 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://harshalpinge.vercel.app/" />
     <meta property="og:site_name" content="Harshal Pinge Portfolio" />
-    <meta property="og:title" content="Harshal Pinge - Full-Stack Developer | Fresh Graduate 2025" />
-    <meta property="og:description" content="Computer Engineering graduate (2025) with 4.5/5 rated internship at Fulcrum Resources. Published npm package (DevMetrics SDK). Built enterprise applications with 25+ REST APIs. Strong in React, Next.js, Node.js, MongoDB. Seeking full-stack developer roles." />
-    <meta property="og:image" content="https://harshalpinge.vercel.app/assets/portfolio-preview.jpg" />
-    <meta property="og:image:secure_url" content="https://harshalpinge.vercel.app/assets/portfolio-preview.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:title" content="Harshal Pinge — Frontend &amp; Full-Stack Developer" />
+    <meta property="og:description" content="Computer Engineering graduate building web applications with React, Next.js, and Node.js. View selected projects, experience, art, and writing." />
+    <meta property="og:image" content="https://harshalpinge.vercel.app/assets/portfolio.jpg" />
+    <meta property="og:image:secure_url" content="https://harshalpinge.vercel.app/assets/portfolio.jpg" />
+    <meta property="og:image:width" content="1194" />
+    <meta property="og:image:height" content="1467" />
     <meta property="og:image:alt" content="Harshal Pinge - Full-Stack Developer Portfolio" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://harshalpinge.vercel.app/" />
-    <meta name="twitter:title" content="Harshal Pinge - Frontend Developer | Full-Stack Developer | Fresh Graduate 2025" />
-    <meta name="twitter:description" content="Computer Engineering graduate (2025) | 4.5/5 internship rating | Published npm package | Built 25+ REST APIs | 100+ LeetCode problems | Seeking full-stack roles" />
-    <meta name="twitter:image" content="https://harshalpinge.vercel.app/assets/portfolio-preview.jpg" />
+    <meta name="twitter:title" content="Harshal Pinge — Frontend &amp; Full-Stack Developer" />
+    <meta name="twitter:description" content="Computer Engineering graduate building web applications with React, Next.js, and Node.js. 215+ LeetCode problems solved." />
+    <meta name="twitter:image" content="https://harshalpinge.vercel.app/assets/portfolio.jpg" />
     <meta name="twitter:creator" content="@HarshalPinge" />
 
     <!-- Additional Meta Tags -->
@@ -48,7 +66,7 @@
     <meta name="geo.position" content="18.5204;73.8567" />
     <meta name="ICBM" content="18.5204, 73.8567" />
 
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/icon.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   </head>
   <body>

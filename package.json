@@ -4,30 +4,26 @@
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@fontsource/poppins": "^5.0.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
-    "emailjs-com": "^3.2.0",
-    "postcss-minify-font-values": "^6.0.2",
+    "matter-js": "^0.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
-    "react-icons": "^5.0.1",
     "react-router-dom": "^6.22.1",
-    "react-scripts": "5.0.1",
-    "react-scroll": "^1.9.0",
-    "react-tsparticles": "^2.12.2",
-    "script": "^0.1.4",
-    "tsparticles-slim": "^2.12.0",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "set GENERATE_SOURCEMAP=false && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +45,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@playwright/test": "^1.48.0",
+    "dotenv-expand": "^9.0.0",
     "tailwindcss": "^3.4.1"
   }
 }

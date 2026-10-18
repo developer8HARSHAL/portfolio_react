@@ -1,26 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 import App from './App';
+import { ThemeProvider } from './context/ThemeContext';
 import './index.css';
 
-const initGA = () => {
-  import('react-ga4').then(({ default: ReactGA }) => {
-    ReactGA.initialize('G-XXKW2BDQBL');
-  });
-};
-
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(initGA);
-} else {
-  setTimeout(initGA, 1000);
-}
+ReactGA.initialize('G-XXKW2BDQBL');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>
 );

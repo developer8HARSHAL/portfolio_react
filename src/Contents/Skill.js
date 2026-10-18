@@ -1,243 +1,199 @@
-function Skill() {
-  const domains = [
-    {
-      title: "Frontend",
-      icon: (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-        </svg>
-      ),
-      color: "blue",
-      skills: [
-        { name: "React.js", level: 90 },
-        { name: "Next.js 14", level: 85 },
-        { name: "Redux Toolkit", level: 80 },
-        { name: "Tailwind CSS", level: 90 },
-        { name: "Responsive Design", level: 95 },
-      ]
-    },
-    {
-      title: "Backend",
-      icon: (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-        </svg>
-      ),
-      color: "blue",
-      skills: [
-        { name: "Node.js", level: 85 },
-        { name: "Express.js", level: 85 },
-        { name: "REST APIs", level: 90 },
-        { name: "JWT Authentication", level: 80 },
-        { name: "Middleware Design", level: 80 },
-      ]
-    },
-    {
-      title: "Languages",
-      icon: (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-        </svg>
-      ),
-      color: "blue",
-      skills: [
-        { name: "JavaScript (ES6+)", level: 90 },
-        { name: "C++ (STL, OOP)", level: 75 },
-        { name: "SQL", level: 80 },
-      ]
-    },
-    {
-      title: "Database",
-      icon: (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-        </svg>
-      ),
-      color: "blue",
-      skills: [
-        { name: "MongoDB", level: 85 },
-        { name: "GridFS", level: 75 },
-        { name: "Aggregation", level: 80 },
-        { name: "Indexes", level: 75 },
-        { name: "MySQL", level: 80 },
-      ]
-    },
-    {
-      title: "DevOps & Tools",
-      icon: (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      ),
-      color: "blue",
-      skills: [
-        { name: "AWS (EC2, S3, Lambda)", level: 75 },
-        { name: "Git/GitHub", level: 90 },
-        { name: "npm Publishing", level: 75 },
-        { name: "Postman", level: 85 },
-      ]
-    },
-    {
-      title: "Additional",
-      icon: (
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-        </svg>
-      ),
-      color: "blue",
-      skills: [
-        { name: "LangChain", level: 70 },
-        { name: "OpenAI API", level: 75 },
-        { name: "Agile/Scrum", level: 80 },
-        { name: "Code Optimization", level: 85 },
-      ]
-    }
-  ];
+import { useEffect, useRef, useState } from 'react';
+import Container from '../Components/ui/Container';
 
-  const colorSchemes = {
-    blue: {
-      gradient: "from-blue-600 to-cyan-900",
-      text: "text-blue-400"
-    }
+const capabilities = [
+  {
+    number: '01',
+    category: 'Frontend',
+    skills: ['React.js', 'Next.js 14', 'Redux Toolkit', 'Tailwind CSS', 'Responsive design'],
+    icon: 'frontend',
+  },
+  {
+    number: '02',
+    category: 'Backend',
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT authentication', 'Middleware design'],
+    icon: 'backend',
+  },
+  {
+    number: '03',
+    category: 'Databases',
+    skills: ['MongoDB', 'MySQL', 'GridFS', 'Aggregation', 'Indexes'],
+    icon: 'database',
+  },
+  {
+    number: '04',
+    category: 'Languages & fundamentals',
+    skills: ['JavaScript', 'C++ (STL, OOP)', 'Java', 'Python', 'SQL'],
+    foundation: 'Data structures & algorithms · Arrays · Strings · Dynamic programming · Stacks · Queues',
+    icon: 'code',
+  },
+];
+
+// Generic, non-brand category glyphs — deliberately simple line icons rather
+// than specific tool logos, since the icon represents the discipline, not
+// any one product.
+function CategoryIcon({ type, className }) {
+  const common = {
+    className,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.5,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
   };
 
+  if (type === 'backend') {
+    return (
+      <svg {...common}>
+        <rect x="3.5" y="4" width="17" height="5.5" rx="1.2" />
+        <rect x="3.5" y="14.5" width="17" height="5.5" rx="1.2" />
+        <circle cx="7" cy="6.75" r="0.75" fill="currentColor" stroke="none" />
+        <circle cx="7" cy="17.25" r="0.75" fill="currentColor" stroke="none" />
+      </svg>
+    );
+  }
+
+  if (type === 'database') {
+    return (
+      <svg {...common}>
+        <ellipse cx="12" cy="5.5" rx="8" ry="2.8" />
+        <path d="M4 5.5v13c0 1.5 3.6 2.8 8 2.8s8-1.3 8-2.8v-13" />
+        <path d="M4 12c0 1.5 3.6 2.8 8 2.8s8-1.3 8-2.8" />
+      </svg>
+    );
+  }
+
+  if (type === 'code') {
+    return (
+      <svg {...common}>
+        <path d="M9 6.5 3.5 12 9 17.5" />
+        <path d="M15 6.5 20.5 12 15 17.5" />
+      </svg>
+    );
+  }
+
   return (
-    <section id="skill" className="min-h-screen py-32 lg:py-40 relative overflow-hidden">
+    <svg {...common}>
+      <rect x="3.5" y="4.5" width="17" height="15" rx="1.4" />
+      <path d="M3.5 8.5h17" />
+      <circle cx="6.2" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
+// Fires once when the ledger scrolls into view, so the rail line draws
+// downward a single time rather than replaying on every scroll pass.
+function useRevealOnce(threshold = 0.15) {
+  const ref = useRef(null);
+  const [revealed, setRevealed] = useState(false);
 
-      <div className="w-[90%] lg:w-[85%] xl:w-[80%] mx-auto relative z-10">
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
 
-        {/* Section Header */}
-        <div className="mb-20 lg:mb-28">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full mb-6">
-            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-            <span className="text-sm font-medium text-blue-300">Technical Expertise</span>
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, revealed];
+}
+
+function Skill() {
+  const [railRef, revealed] = useRevealOnce();
+
+  return (
+    <section id="skill" className="relative overflow-hidden bg-canvas py-section-y" aria-labelledby="skill-heading">
+      <Container>
+        <div className="mb-section-head flex flex-wrap items-end justify-between gap-5" data-aos="fade-up">
+          <div>
+            <h2
+              id="skill-heading"
+              className="font-display text-display font-bold leading-[0.95] tracking-[-0.05em] text-paper sm:text-display-lg"
+            >
+              Skills<span className="text-muted">.</span>
+            </h2>
           </div>
-
-          <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-4">
-            Skills &<span className="text-gradient-primary"> Tech Stack</span>
-          </h2>
-
-          <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-6"></div>
-
-          <p className="text-xl lg:text-2xl text-slate-400 max-w-3xl">
-            Proven technical expertise across the full-stack development spectrum, from frontend to backend, databases to cloud deployment
-          </p>
         </div>
 
-        {/* Stats Summary */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="card-glass text-center p-6">
-            <div className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-blue-400 to-cyan-900 bg-clip-text text-transparent mb-2">
-              30+
-            </div>
-            <div className="text-sm text-slate-400 font-medium">Technologies</div>
-          </div>
-          <div className="card-glass text-center p-6">
-            <div className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-              6
-            </div>
-            <div className="text-sm text-slate-400 font-medium">Domains</div>
-          </div>
-          <div className="card-glass text-center p-6">
-            <div className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-              100+
-            </div>
-            <div className="text-sm text-slate-400 font-medium">LeetCode</div>
-          </div>
-          <div className="card-glass text-center p-6">
-            <div className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent mb-2">
-              4.5/5
-            </div>
-            <div className="text-sm text-slate-400 font-medium">Intern Rating</div>
-          </div>
-        </div>
+        <div ref={railRef} className="relative border-t border-line pt-8 md:pt-10">
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className={`absolute left-6 top-0 bottom-0 w-px origin-top bg-muted-strong transition-transform duration-1000 ease-out ${
+                revealed ? 'scale-y-100' : 'scale-y-0'
+              }`}
+            />
 
-        {/* Domain Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {domains.map((domain, domainIndex) => {
-            const colors = colorSchemes[domain.color];
-
-            return (
-              <div
-                key={domainIndex}
-                className="card-glass-hover p-6"
-              >
-                {/* Domain Header */}
-                <div className="flex items-center gap-3 mb-5 pb-5 border-b border-white/10">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center shadow-lg`}>
-                    {domain.icon}
+            {capabilities.map((capability, index) => {
+              return (
+                <div
+                  key={capability.number}
+                  className="group relative flex gap-6 pb-12 last:pb-8 sm:gap-8"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 80}
+                >
+                  <div className="flex w-12 flex-shrink-0 flex-col items-center gap-2 pt-1">
+                    <span className="relative z-10 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-line bg-canvas font-mono text-caption text-muted transition-colors duration-300 group-hover:border-paper group-hover:bg-paper group-hover:text-ink">
+                      {capability.number}
+                    </span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white">{domain.title}</h3>
-                    <p className="text-xs text-slate-500">{domain.skills.length} skills</p>
-                  </div>
-                </div>
 
-                {/* Skills List */}
-                <div className="space-y-4">
-                  {domain.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex}>
-                      {/* Skill Name with Percentage */}
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-300">
-                          {skill.name}
-                        </span>
-                        <span className={`text-sm font-bold ${colors.text}`}>
-                          {skill.level}%
-                        </span>
+                  <div className="flex min-w-0 flex-1 gap-4">
+                    <CategoryIcon
+                      type={capability.icon}
+                      className="h-7 w-7 flex-shrink-0 text-muted transition-colors duration-300 group-hover:text-foreground"
+                    />
+
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                        <h3 className="font-mono text-small font-semibold uppercase tracking-[0.13em] text-paper">
+                          {capability.category}
+                        </h3>
                       </div>
 
-                      {/* Progress Bar */}
-                      <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full bg-gradient-to-r ${colors.gradient} rounded-full`}
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </div>
+                      <ul aria-label={`${capability.category} skills`} className="mt-4 flex flex-wrap gap-2.5">
+                        {capability.skills.map((skill) => (
+                          <li
+                            key={skill}
+                            className="rounded-tile border border-line bg-surface px-4 py-2.5 font-medium leading-tight tracking-[-0.01em] text-small text-paper transition-colors duration-300 group-hover:border-muted-strong"
+                          >
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+
+                      {capability.foundation && (
+                        <p className="mt-5 border-l border-line pl-3 font-mono text-caption leading-relaxed text-muted">
+                          {capability.foundation}
+                        </p>
+                      )}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
 
-        {/* Problem Solving & Certifications */}
-        <div className="grid md:grid-cols-2 gap-6">
-
-          {/* Problem Solving */}
-          <div className="card-glass-hover p-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
+            <div className="flex gap-6 sm:gap-8" aria-hidden="true">
+              <div className="flex w-12 flex-shrink-0 flex-col items-center gap-1.5 pb-1">
+                <span className="h-1 w-1 rounded-full bg-muted/45" />
+                <span className="h-1 w-1 rounded-full bg-muted/25" />
+                <span className="h-1 w-1 rounded-full bg-muted/10" />
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-2">Problem Solving</h3>
-                <p className="text-slate-400 text-sm mb-3">
-                  Strong DSA foundation: Arrays, Strings, Dynamic Programming, Stacks, Queues, and algorithmic problem-solving
-                </p>
-                <div className="flex gap-2">
-                  <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs font-medium text-purple-300">
-                    100+ LeetCode
-                  </span>
-                  <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-lg text-xs font-medium text-blue-300">
-                    C++ STL
-                  </span>
-                </div>
-              </div>
+              <div className="flex-1" />
             </div>
           </div>
-
-
-
         </div>
-
-      </div>
+      </Container>
     </section>
   );
 }

@@ -1,88 +1,373 @@
-import React from 'react'
+import { lazy, Suspense, useState, useRef, useCallback, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { navLinks, secondaryLinks } from '../config/navigation'
+import SOCIAL_LINK_ITEMS from '../data/socialLinks'
+import Container from './ui/Container'
+import SocialLinks from './ui/SocialLinks'
+import { scrollToId } from '../utils/scrollToId'
 
-function Footer() {
-  const currentYear = new Date().getFullYear();
+const OrbitGame = lazy(() => import('./OrbitGame'))
+
+/* ── Constants ─────────────────────────────────────────────────────────── */
+
+const LAUNCH_MS = 2200
+const EXIT_MS   = 1600
+
+const STARS = Array.from({ length: 88 }, (_, i) => ({
+  x: ((i * 137.508 + 31) % 99).toFixed(1),
+  y: ((i * 97.31  + 19) % 98).toFixed(1),
+  r: i % 9 === 0 ? 1.5 : 1,
+  o: +(0.07 + (i % 11) * 0.055).toFixed(2),
+}))
+
+/* ── Stars ──────────────────────────────────────────────────────────────── */
+
+function Stars() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {STARS.map((s, i) => (
+        <span
+          key={i}
+          className="space-star absolute block rounded-full"
+          style={{ left: `${s.x}%`, top: `${s.y}%`, width: s.r, height: s.r, opacity: s.o }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/* ── Rocket SVG ─────────────────────────────────────────────────────────── */
+
+function Rocket({ className, showFlame = false, style }) {
+  return (
+    <svg
+      viewBox="0 0 44 82"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={style}
+      aria-hidden="true"
+    >
+      <path d="M12 57 L2 73 L12 70 Z"  fill="var(--color-rocket-structure)" />
+      <path d="M32 57 L42 73 L32 70 Z" fill="var(--color-rocket-structure)" />
+      <path d="M14 23 L12 65 L32 65 L30 23 Z" fill="var(--color-rocket-shell)" />
+      <path d="M22 4 C16 6 12 15 12 23 L32 23 C32 15 28 6 22 4 Z"  fill="var(--color-rocket-highlight)" />
+      <path d="M22 4 C20 8 18 17 18 23 L26 23 C26 17 24 8 22 4 Z"   fill="var(--color-rocket-shadow)" />
+      <circle cx="22" cy="35" r="6"   fill="none" stroke="var(--color-rocket-window-frame)" strokeWidth="1.5" />
+      <circle cx="22" cy="35" r="4.5" fill="var(--color-rocket-window)" />
+      <circle cx="20.5" cy="33.5" r="1.2" fill="var(--color-rocket-window-glint)" opacity="0.7" />
+      <rect x="16" y="63" width="12" height="5" rx="2.5" fill="var(--color-rocket-window-frame)" />
+      <path d="M17 68 L15 77 L29 77 L27 68 Z" fill="var(--color-rocket-engine)" />
+      {showFlame ? (
+        <g className="space-rocket-flame">
+          <ellipse cx="22" cy="83" rx="6"   ry="11"  fill="var(--color-space-flame)" opacity="0.88" />
+          <ellipse cx="22" cy="87" rx="4"   ry="7.5" fill="var(--color-space-flame-hot)" opacity="0.92" />
+          <ellipse cx="22" cy="90" rx="2.2" ry="4.5" fill="var(--color-space-flame-core)" opacity="0.70" />
+        </g>
+      ) : (
+        <ellipse cx="22" cy="80" rx="2" ry="2.5" fill="var(--color-space-flame)" opacity="0.18" />
+      )}
+    </svg>
+  )
+}
+
+/* ── Confirmation modal ─────────────────────────────────────────────────── */
+
+function ConfirmModal({ onConfirm, onCancel }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onCancel() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onCancel])
 
   return (
-    <footer className='bg-slate-900 border-t border-white/10 py-12'>
-      <div className='w-[90%] lg:w-[85%] xl:w-[80%] mx-auto'>
-        
-        {/* Main Footer Content */}
-        <div className='grid md:grid-cols-3 gap-8 mb-8'>
-          
-          {/* Left - Branding */}
-          <div>
-            <h3 className='text-2xl font-bold text-white mb-2'>Harshal Pinge</h3>
-            <p className='text-slate-400 text-sm'>Frontend Developer | Fresh Graduate 2025</p>
-          </div>
-
-          {/* Center - Quick Links */}
-          <div>
-            <h4 className='text-white font-semibold mb-3 text-sm uppercase tracking-wider'>Quick Links</h4>
-            <div className='flex flex-col gap-2'>
-              <a href='#about' className='text-slate-400 hover:text-blue-400 text-sm transition-colors'>About</a>
-              <a href='#experience' className='text-slate-400 hover:text-blue-400 text-sm transition-colors'>Experience</a>
-              <a href='#project' className='text-slate-400 hover:text-blue-400 text-sm transition-colors'>Projects</a>
-              <a href='#contact' className='text-slate-400 hover:text-blue-400 text-sm transition-colors'>Contact</a>
-            </div>
-          </div>
-
-          {/* Right - Social Links */}
-          <div>
-            <h4 className='text-white font-semibold mb-3 text-sm uppercase tracking-wider'>Connect</h4>
-            <div className='flex gap-3'>
-              <a 
-                href='https://github.com/developer8HARSHAL' 
-                target='_blank' 
-                rel='noopener noreferrer'
-                className='w-10 h-10 bg-white/5 hover:bg-blue-500 border border-white/10 hover:border-blue-500 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300'
-                aria-label='GitHub'
-              >
-                <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
-                  <path d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z' />
-                </svg>
-              </a>
-              
-              <a 
-                href='https://www.linkedin.com/in/harshal-pinge-ab13b5216/' 
-                target='_blank' 
-                rel='noopener noreferrer'
-                className='w-10 h-10 bg-white/5 hover:bg-blue-500 border border-white/10 hover:border-blue-500 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300'
-                aria-label='LinkedIn'
-              >
-                <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
-                  <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' />
-                </svg>
-              </a>
-
-              <a 
-                href='mailto:harshalpinge@gmail.com'
-                className='w-10 h-10 bg-white/5 hover:bg-blue-500 border border-white/10 hover:border-blue-500 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300'
-                aria-label='Email'
-              >
-                <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
-                </svg>
-              </a>
-            </div>
-          </div>
+    <div className="fixed inset-0 z-modal flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-canvas/80 backdrop-blur-md" onClick={onCancel} />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="bh-modal-title"
+        className="bh-modal-enter relative z-10 w-full max-w-[340px] rounded-panel border border-line bg-surface p-8"
+      >
+        <p
+          className="space-warning mb-5 text-center font-mono text-micro uppercase tracking-[0.18em]"
+        >
+          ⚠ Time Dilation Warning
+        </p>
+        <h2 id="bh-modal-title" className="mb-3 text-center font-display text-title text-foreground">
+          Are you sure?
+        </h2>
+        <p className="mb-8 text-center text-small text-muted leading-relaxed">
+          It might pass years.
+          <br />
+          Or never at all.
+          <br />
+          Still want to go?
+        </p>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="flex-1 rounded-tile border border-line py-3 text-small text-muted transition-colors duration-200 hover:border-foreground/30 hover:text-foreground"
+          >
+            Abort
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="flex-1 rounded-tile py-3 text-small font-semibold transition-opacity duration-200 hover:opacity-90"
+            style={{ background: 'rgb(var(--color-foreground-rgb))', color: 'rgb(var(--color-canvas-rgb))' }}
+          >
+            Launch
+          </button>
         </div>
-
-        {/* Bottom - Copyright */}
-        <div className='pt-8 border-t border-white/10'>
-          <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
-            <p className='text-slate-500 text-sm'>
-              © {currentYear} Harshal Pinge
-            </p>
-            <p className='text-slate-500 text-sm'>
-              Coded with <span className='text-red-400'></span> using React & Tailwind CSS
-            </p>
-          </div>
-        </div>
-
       </div>
+    </div>
+  )
+}
+
+/* ── Full-screen space transition overlay ───────────────────────────────── */
+
+function SpaceOverlay({ seqAnimation, rocketAnimation, label }) {
+  return (
+    <div
+      className="space-scene-bg fixed inset-0 z-overlay flex flex-col items-center justify-center overflow-hidden"
+      style={{ animation: seqAnimation }}
+    >
+      <Stars />
+      <div className="relative z-10 flex flex-col items-center gap-8">
+        <Rocket className="w-14 h-auto" showFlame style={{ animation: rocketAnimation }} />
+        <p className="space-label font-mono text-micro uppercase tracking-[0.2em] animate-pulse">
+          {label}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+
+function Footer() {
+  const year = new Date().getFullYear()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // Phase machine: idle → confirming → launching → playing → done → exiting → idle
+  const [phase, setPhase]     = useState('idle')
+  const [gameKey, setGameKey] = useState(0)
+  const timerRef = useRef(null)
+  const reducedMotion = useRef(
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+
+  const clearT = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current)
+  }, [])
+
+  const handleLaunch = useCallback(() => {
+    if (reducedMotion.current) { setPhase('playing'); return }
+    setPhase('launching')
+    clearT()
+    timerRef.current = setTimeout(() => setPhase('playing'), LAUNCH_MS)
+  }, [clearT])
+
+  const handleDone = useCallback(() => setPhase('done'), [])
+
+  const handleExit = useCallback(() => {
+    if (reducedMotion.current) { setGameKey(k => k + 1); setPhase('idle'); return }
+    setPhase('exiting')
+    clearT()
+    timerRef.current = setTimeout(() => {
+      setGameKey(k => k + 1)
+      setPhase('idle')
+    }, EXIT_MS)
+  }, [clearT])
+
+  useEffect(() => () => clearT(), [clearT])
+
+  const goToSection = (id) => {
+    if (location.pathname !== '/') { navigate(`/#${id}`); return }
+    scrollToId(id)
+  }
+
+  const teaserVisible    = phase === 'idle' || phase === 'confirming'
+  // Mounted during 'launching' so the canvas warms up behind the overlay —
+  // when the overlay fades, the game is already rendered and ship appears
+  // 350ms after autoStart fires.
+  const gameInDOM        = phase === 'launching' || phase === 'playing' || phase === 'done' || phase === 'exiting'
+  const gameFullyVisible = phase === 'playing' || phase === 'done'
+
+  return (
+    <footer className="relative overflow-hidden border-t border-line bg-canvas py-12">
+      <Container className="relative z-10">
+
+        {/* ── Fixed overlays — position:fixed escapes footer's overflow:hidden ── */}
+        {phase === 'confirming' && (
+          <ConfirmModal onConfirm={handleLaunch} onCancel={() => setPhase('idle')} />
+        )}
+        {phase === 'launching' && (
+          <SpaceOverlay
+            seqAnimation={`launchOverlaySeq ${LAUNCH_MS}ms ease-in-out forwards`}
+            rocketAnimation={`rocketLaunchAscent ${Math.round(LAUNCH_MS * 0.8)}ms ease-in forwards`}
+            label="Approaching event horizon"
+          />
+        )}
+        {phase === 'exiting' && (
+          <SpaceOverlay
+            seqAnimation={`exitOverlaySeq ${EXIT_MS}ms ease-in-out forwards`}
+            rocketAnimation={`rocketLandDescent ${Math.round(EXIT_MS * 0.85)}ms ease-out forwards`}
+            label="Returning to orbit"
+          />
+        )}
+
+        {/* ── Game area ───────────────────────────────────────────────────── */}
+        <div className="mb-8">
+
+          {/* COMPACT TEASER — visible only when game is not active.
+              Small footprint: the rocket is parked, not demanding attention. */}
+          {teaserVisible && (
+            <div className="overflow-hidden rounded-panel border border-line">
+              <div
+                className="space-teaser-bg relative flex flex-col items-center gap-5 overflow-hidden px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-8 sm:py-6"
+              >
+                <Stars />
+
+                {/* Rocket — compact, floating */}
+                <div className="space-rocket-float relative z-10 flex-shrink-0">
+                  <Rocket className="w-10 h-auto" />
+                  <div className="space-rocket-glow absolute -bottom-1 left-1/2 -translate-x-1/2 h-4 w-8 rounded-full blur-lg" />
+                </div>
+
+                {/* Copy */}
+                <div className="relative z-10 min-w-0 flex-1 text-center sm:text-left">
+                  <p className="space-label mb-0.5 font-mono text-micro uppercase tracking-[0.18em]">
+                    Coordinates: Sagittarius A*
+                  </p>
+                  <p className="font-display text-muted text-foreground">
+                    Travel to the Black Hole
+                  </p>
+                  <p className="text-small text-muted">
+                    One-way ticket. No refunds. Time dilation not included.
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="relative z-10 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setPhase('confirming')}
+                    className="space-cta inline-flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-small"
+                  >
+                    Initiate Journey
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                      <path
+                        d="M1.5 6.5h10M7 2.5l4.5 4L7 10.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* GAME PANEL — grows from 0 → full height as the launch overlay fades.
+              The panel itself IS the landing animation: a hatch opening into
+              the black hole simulation. grid-template-rows is the only
+              performant way to animate height to/from auto. */}
+          {gameInDOM && (
+            <div
+              className="bh-expand-grid overflow-hidden rounded-panel border border-line"
+              style={{
+                gridTemplateRows: gameFullyVisible ? '1fr' : '0fr',
+                // Border fades with the panel so there's no ghost 1px line at 0fr
+                borderColor: gameFullyVisible ? 'var(--color-line)' : 'transparent',
+              }}
+            >
+              {/* overflow:hidden + min-h:0 are required for grid-rows trick */}
+              <div className="min-h-0 overflow-hidden">
+                <Suspense fallback={<div className="space-game-fallback" role="status" aria-label="Loading black hole simulation" />}>
+                  <OrbitGame
+                    key={gameKey}
+                    autoStart={gameFullyVisible}
+                    hideOverlay
+                    onDone={handleDone}
+                  />
+                </Suspense>
+
+                {phase === 'done' && (
+                  <div className="space-game-footer flex flex-wrap items-center justify-between gap-3 px-5 py-3">
+                    <p className="space-game-footer-copy text-small">
+                      Ready to leave the event horizon?
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleExit}
+                      className="space-game-exit rounded-full px-4 py-1.5 text-small"
+                    >
+                      Exit black hole ↗
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ── Original footer nav — unchanged ── */}
+        <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <Link
+            to="/"
+            className="flex-shrink-0 text-center font-display text-title font-bold tracking-tight text-foreground md:text-left"
+          >
+            HP
+          </Link>
+
+          <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            {navLinks.map((item) => (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => goToSection(item.id)}
+                className="text-caption tracking-wider text-foreground/60 transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </button>
+            ))}
+            <span aria-hidden="true" className="hidden h-4 w-px bg-line sm:block" />
+            <span className="basis-full text-center font-mono text-micro uppercase tracking-[0.14em] text-muted sm:hidden">
+              Elsewhere
+            </span>
+            <span className="hidden font-mono text-micro uppercase tracking-[0.14em] text-muted sm:inline">
+              Elsewhere
+            </span>
+            {secondaryLinks.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className="text-caption tracking-wider text-foreground/60 transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <SocialLinks
+            links={SOCIAL_LINK_ITEMS}
+            tone="dark"
+            className="flex-shrink-0 justify-center md:justify-end"
+          />
+        </div>
+
+        <div className="border-t border-line pt-8 text-center">
+          <p className="text-small text-foreground/40">© {year} Harshal Pinge</p>
+        </div>
+      </Container>
     </footer>
   )
 }
 
-export default Footer;
+export default Footer
