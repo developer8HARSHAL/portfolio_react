@@ -1,71 +1,111 @@
+|-- .env
+|-- .env.example
 |-- .gitignore
+|-- e2e
+    |-- 01-homepage.spec.js
+    |-- 02-navigation.spec.js
+    |-- 03-sections.spec.js
+    |-- 04-contact.spec.js
+    |-- 05-art-page.spec.js
+    |-- 06-writing-page.spec.js
+    |-- 07-routes.spec.js
+    |-- 08-accessibility.spec.js
+    |-- global-css-token.test.cjs
 |-- package-lock.json
 |-- package.json
+|-- playwright-report
+    |-- index.html
+|-- playwright.config.js
+|-- postcss.config.js
 |-- public
     |-- assets
         |-- 3.png
+        |-- art
+            |-- Dark Matter_ The compulsive alternate-universe thriller, now on Apple TV+.jpg
+            |-- dark-matter.jpg
+            |-- img1.jpeg
+            |-- img2.jpeg
+            |-- img3.jpeg
+            |-- img4.jpeg
+            |-- img5.jpeg
+            |-- img6.jpeg
+            |-- img7.jpeg
+            |-- img8.jpeg
         |-- aws.jpeg
-        |-- bootstrap.png
-        |-- c++.jpg
-        |-- c++.png
-        |-- c.jpeg
         |-- coff.png
         |-- css.jpeg
         |-- ds2.png
-        |-- edms.png
         |-- eternal.png
         |-- external.webp
         |-- fs3.png
         |-- Gemini_Generated_Image_h5ce23h5ce23h5ce.png
         |-- github.jpg
-        |-- HarshalPinge.pdf
+        |-- hero-grain.webp
         |-- html.jpg
-        |-- icon.png
         |-- im1 (2).png
         |-- im1.png
         |-- im3.png
         |-- images.png
         |-- instagram.png
-        |-- js.png
         |-- linkedin.png
-        |-- LinkedIn_Profile-removebg-preview.png
-        |-- LinkedIn_Profile.jpg
-        |-- LinkedIn_Profile1.jpg
+        |-- linkedin1.png
+        |-- linkedin2.png
         |-- LinkedIn_Profile1.webp
         |-- LinkedIn_Profile2.png
-        |-- loading.gif
-        |-- logo.png
-        |-- md.png
-        |-- ms.png
         |-- n8n2.png
         |-- nj.png
-        |-- portfolio.jpg
-        |-- py.jpeg
-        |-- react.png
-        |-- tl.png
-        |-- twitter.png
+        |-- projects
+            |-- agent_vid.mp4
+            |-- aws_img.png
+            |-- dev_img.png
+            |-- edms.mp4
+            |-- java_error_img.png
+            |-- java_img.png
+            |-- java_pimg.png
+            |-- roi_img.png
     |-- index.html
     |-- manifest.json
     |-- robots.txt
 |-- README.md
 |-- src
     |-- App.js
+    |-- App.test.js
     |-- Components
+        |-- ErrorBoundary.js
         |-- Footer.js
         |-- Header.js
+        |-- OrbitGame.jsx
+        |-- ui
+            |-- Container.js
+            |-- IconButton.js
+            |-- Icons.js
+            |-- PillButton.js
+            |-- SectionHeading.js
+            |-- SocialLinks.js
+            |-- SurfaceCard.js
+            |-- TagList.js
+    |-- config
+        |-- navigation.js
     |-- Contents
         |-- About.js
+        |-- Art.js
         |-- Contact.js
-        |-- Experience.js
         |-- Home.js
         |-- Project.js
         |-- Skill.js
+        |-- Writing.js
+    |-- context
+        |-- ThemeContext.js
+    |-- data
+        |-- art.js
+        |-- projects.js
+        |-- socialLinks.js
+        |-- writing.json
     |-- index.css
     |-- index.js
-    |-- utility
-        |-- ErrorBoundary.js
-        |-- Loading.js
-        |-- multi.js
-        |-- Particles.js
-        |-- ScrollToTop.js
+    |-- utils
+        |-- scrollToId.js
+        |-- useScrollProgress.js
 |-- tailwind.config.js
+|-- test-results
+    |-- .last-run.json
