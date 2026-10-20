@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { navLinks, RESUME_URL } from '../config/navigation';
 import Container from './ui/Container';
@@ -59,6 +60,17 @@ const Header = () => {
   useEffect(() => {
     setIsHidden(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const header = headerRef.current;
@@ -141,16 +153,6 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -235,6 +237,7 @@ const Header = () => {
   const hidden = isHidden && !isMobileMenuOpen;
 
   return (
+    <>
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 lg:left-10 lg:right-10 z-50 transition-all duration-500 ${hidden ? '-translate-y-2 opacity-0 pointer-events-none' : ''
@@ -292,7 +295,6 @@ const Header = () => {
             </div>
 
             <button
-              ref={mobileToggleRef}
               type="button"
               onClick={toggleTheme}
               className="theme-toggle"
@@ -338,6 +340,7 @@ const Header = () => {
             </button>
 
             <button
+              ref={mobileToggleRef}
               type="button"
               onClick={toggleMobileMenu}
               className={`relative ${isMobileMenuOpen ? 'z-[70]' : 'z-50'
@@ -353,98 +356,133 @@ const Header = () => {
               </div>
             </button>
           </div>
-
-          <div
-            className={`mobile-menu-container lg:hidden fixed inset-0 z-[60] transition-all duration-500 ${isMobileMenuOpen ? 'visible' : 'invisible'
-              }`}
-          >
-            <div
-              className={`absolute inset-0 z-0 bg-black/80 backdrop-blur-xl transition-opacity duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
-                }`}
-              onClick={closeMobileMenu}
-              aria-hidden="true"
-            />
-
-            <div
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
-              id="mobile-navigation"
-              ref={mobileMenuRef}
-              className={`absolute top-0 right-0 z-10 h-full w-full overflow-y-auto overscroll-contain sm:w-80 bg-canvas backdrop-blur-2xl border-l border-line shadow-2xl transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-                }`}
-            >
-              <div className="flex min-h-full flex-col pt-24 pb-8 px-6">
-                <div className="pill-dark self-start mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground"></span>
-                  available for work
-                </div>
-
-                <nav className="space-y-2 -mx-1 px-1">
-                  {navLinks.map((item, index) =>
-                    item.kind === 'route' ? (
-                      <Link
-                        key={item.id}
-                        to={item.path}
-                        onClick={closeMobileMenu}
-                        className={`block w-full text-left px-5 py-3 text-[16px] font-semibold rounded-line transition-colors duration-300 ${isMobileMenuOpen ? 'animate-menu-item' : 'opacity-0'
-                          } ${isActive(item)
-                            ? 'bg-ink text-paper border border-line'
-                            : 'text-stone-300 hover:text-foreground hover:bg-white/10'
-                          }`}
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => goToSection(item.id)}
-                        className={`w-full text-left px-5 py-3 text-[16px] font-semibold rounded-line transition-colors duration-300 cursor-pointer ${isMobileMenuOpen ? 'animate-menu-item' : 'opacity-0'
-                          } ${isActive(item)
-                            ? 'bg-ink text-paper border border-line'
-                            : 'text-stone-300 hover:text-foreground hover:bg-white/10'
-                          }`}
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        {item.label}
-                      </button>
-                    )
-                  )}
-                </nav>
-
-                <div className="border-t border-line pt-6 space-y-4">
-                  <a
-                    href="#contact"
-                    className="btn-pill-dark group w-full justify-center"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      goToSection('contact');
-                    }}
-                  >
-                    Reach me out
-                  </a>
-
-                  <PillButton
-                    label="Download Resume"
-                    href={RESUME_URL}
-                    variant="ghost-dark"
-                    icon="external"
-                    external
-                    fullWidth
-                    className="w-full"
-                    onClick={closeMobileMenu}
-                  />
-
-                  <SocialLinks links={SOCIAL_LINK_ITEMS} tone="dark" className="justify-center" />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </Container>
     </header>
+      {createPortal(
+        <div
+          className={`mobile-menu-container fixed inset-0 z-[100] lg:hidden transition-[visibility] duration-300 ${isMobileMenuOpen ? 'visible' : 'invisible pointer-events-none'}`}
+          aria-hidden={!isMobileMenuOpen}
+        >
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-label="Close navigation menu"
+            className={`absolute inset-0 h-full w-full cursor-default bg-ink/65 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+            onClick={closeMobileMenu}
+          />
+
+          <aside
+            role="dialog"
+            aria-modal={isMobileMenuOpen ? true : undefined}
+            aria-label="Mobile navigation"
+            id="mobile-navigation"
+            ref={mobileMenuRef}
+            className={`absolute inset-y-0 right-0 z-10 flex w-full max-w-[420px] flex-col overflow-y-auto overscroll-contain border-l border-line bg-canvas px-5 pb-6 pt-5 shadow-2xl transition-transform duration-300 ease-out sm:px-7 motion-reduce:transition-none ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          >
+            <div className="flex items-center justify-between gap-4 border-b border-line pb-5">
+              <div>
+                <p className="font-display text-lg font-extrabold -tracking-tighter text-foreground">Harshal Pinge.</p>
+                <p className="mt-1 text-xs text-muted">Portfolio navigation</p>
+              </div>
+              <button
+                type="button"
+                onClick={closeMobileMenu}
+                aria-label="Close navigation menu"
+                className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-line bg-surface text-foreground transition-colors hover:bg-surface-raised focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="mt-6 flex items-center justify-between gap-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Navigate</span>
+              <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-strong">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                Available for work
+              </span>
+            </div>
+
+            <nav aria-label="Mobile navigation links" className="mt-3 flex flex-col gap-1.5">
+              {navLinks.map((item, index) => {
+                const active = isActive(item);
+                const itemClass = `group flex min-h-14 w-full items-center gap-4 rounded-xl border px-4 py-3 text-left text-base font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent motion-reduce:transition-none ${active ? 'border-line bg-surface-raised text-foreground' : 'border-transparent text-muted-strong hover:border-line hover:bg-surface hover:text-foreground'}`;
+                const itemContent = (
+                  <>
+                    <span className={`w-6 flex-shrink-0 font-mono text-xs ${active ? 'text-accent' : 'text-muted'}`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="flex-1">{item.label}</span>
+                    <svg className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${active ? 'translate-x-0 text-accent' : '-translate-x-1 text-muted opacity-60 group-hover:translate-x-0 group-hover:opacity-100'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                      <path d="M5 12h14m-6-6l6 6-6 6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </>
+                );
+
+                return item.kind === 'route' ? (
+                  <Link
+                    key={item.id}
+                    to={item.path}
+                    onClick={closeMobileMenu}
+                    aria-current={active ? 'page' : undefined}
+                    className={`${itemClass} group`}
+                    style={{ animationDelay: `${index * 35}ms` }}
+                  >
+                    {itemContent}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => goToSection(item.id)}
+                    aria-current={active ? 'location' : undefined}
+                    className={`${itemClass} group`}
+                    style={{ animationDelay: `${index * 35}ms` }}
+                  >
+                    {itemContent}
+                  </button>
+                );
+              })}
+            </nav>
+
+            <div className="mt-7 border-t border-line pt-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Next step</p>
+              <a
+                href="#contact"
+                className="btn-pill-dark group mt-3 flex min-h-12 w-full items-center justify-between"
+                onClick={(event) => {
+                  event.preventDefault();
+                  goToSection('contact');
+                }}
+              >
+                <span>Let's talk about your project</span>
+                <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path d="M5 12h14m-6-6l6 6-6 6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+
+              <PillButton
+                label="Download resume"
+                href={RESUME_URL}
+                variant="ghost-dark"
+                icon="external"
+                external
+                fullWidth
+                className="mt-3 w-full"
+                onClick={closeMobileMenu}
+              />
+
+              <div className="mt-5 border-t border-line pt-4">
+                <SocialLinks links={SOCIAL_LINK_ITEMS} tone="dark" className="justify-start" />
+              </div>
+            </div>
+          </aside>
+        </div>,
+        document.body
+      )}
+    </>
   );
 };
 
